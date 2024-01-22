@@ -1,0 +1,326 @@
+﻿<Window
+    x:Class="NezurAimbot.Interface.MainInterface"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NezurAimbot.Interface"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Main"
+    Title="Nezur"
+    Width="384"
+    Height="216"
+    MinWidth="640"
+    MinHeight="360"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Closing="Main_Closing"
+    Loaded="Main_Loaded"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <!--  Button Forground Animation Style  -->
+        <Style x:Key="AnimatedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="#dde6e8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="Foreground.Color"
+                                    To="#FF7A7A96"
+                                    Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="Foreground.Color"
+                                    To="#dde6e8"
+                                    Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <!--  Interface Background  -->
+        <Border
+            x:Name="Background"
+            Background="#FF0A0A0F"
+            BorderBrush="#FF282832"
+            BorderThickness="2"
+            CornerRadius="2.5"
+            MouseLeftButtonDown="Drag" />
+        <Grid x:Name="Foreground">
+            <!--  Interface Foreground  -->
+            <Border
+                x:Name="EditorBackground"
+                Margin="120,50,0,0"
+                Background="#FF0A0A0F"
+                BorderBrush="#FF282832"
+                BorderThickness="1.5"
+                CornerRadius="2.5,0,0,0" />
+            <TextBlock
+                Width="85"
+                Height="35"
+                Margin="10,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="/Assets/Fonts/#Poppins Medium"
+                FontSize="25"
+                MouseLeftButtonDown="Drag"
+                Text="Nezur">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#d8315b" />
+                        <GradientStop Offset="1.5" Color="#dde6e8" />
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBlock
+                Width="220"
+                Height="20"
+                Margin="85,12,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="/Assets/Fonts/#Poppins Medium"
+                FontSize="15"
+                Foreground="#FF7A7A96"
+                MouseLeftButtonDown="Drag"
+                Text="ALPHA" />
+            <TextBlock
+                Width="120"
+                Height="20"
+                Margin="130,0,0,5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontFamily="/Assets/Fonts/#Poppins Medium"
+                FontSize="14"
+                Foreground="#FF7A7A96"
+                MouseLeftButtonDown="Drag"
+                Text="Model Status:" />
+            <TextBlock
+                x:Name="ModelStatusText"
+                Width="120"
+                Height="20"
+                Margin="230,0,0,5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontFamily="/Assets/Fonts/#Poppins Medium"
+                FontSize="14"
+                Foreground="DarkRed"
+                MouseLeftButtonDown="Drag"
+                Text="Offline" />
+            <Button
+                Name="Exit"
+                Width="25"
+                Height="25"
+                Margin="0,5,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Exit_Click"
+                Content="&#xE8BB;"
+                FontFamily="/Assets/Fonts/#Segoe Fluent Icons"
+                FontSize="15"
+                Foreground="#dde6e8"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{StaticResource AnimatedButtonStyle}" />
+            <Button
+                Name="Maximize"
+                Width="25"
+                Height="25"
+                Margin="0,5,35,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Maximize_Click"
+                Content="&#xE92d;"
+                FontFamily="/Assets/Fonts/#Segoe Fluent Icons"
+                FontSize="15"
+                Foreground="#dde6e8"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{StaticResource AnimatedButtonStyle}" />
+            <Button
+                Name="Minimize"
+                Width="25"
+                Height="25"
+                Margin="0,5,65,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Minimize_Click"
+                Content="&#xE921;"
+                FontFamily="/Assets/Fonts/#Segoe Fluent Icons"
+                FontSize="15"
+                Foreground="#dde6e8"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{StaticResource AnimatedButtonStyle}" />
+            <!--  Side Bar Buttons  -->
+            <Button
+                Name="Tools"
+                Width="100"
+                Height="34"
+                Margin="18,60,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Tools_Click"
+                Foreground="#FF414150"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}">
+                <StackPanel Margin="-25,0,0,0" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" VerticalAlignment="Center">
+                        <Run FontFamily="/Assets/Fonts/#Segoe Fluent Icons" FontSize="18">&#xEC7A;</Run>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16">Tools</Run>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                Name="Configuration"
+                Width="100"
+                Height="35"
+                Margin="15,100,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Configuration_Click"
+                Foreground="#FF414150"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}">
+                <StackPanel Margin="-15,0,0,0" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" VerticalAlignment="Center">
+                        <Run FontFamily="/Assets/Fonts/#Segoe Fluent Icons" FontSize="18">&#xE8FD;</Run>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16">Config</Run>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                Name="Settings"
+                Width="100"
+                Height="35"
+                Margin="15,140,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Settings_Click"
+                Foreground="#FF414150"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" VerticalAlignment="Center">
+                        <Run FontFamily="/Assets/Fonts/#Segoe Fluent Icons" FontSize="18">&#xE713;</Run>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16">Settings</Run>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                Name="SpooferButton"
+                Width="100"
+                Height="35"
+                Margin="15,180,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="{x:Null}"
+                Click="Spoofer_Click"
+                Foreground="#FF414150"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}">
+                <StackPanel Margin="-3,0,0,0" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" VerticalAlignment="Center">
+                        <Run FontFamily="/Assets/Fonts/#Segoe Fluent Icons" FontSize="18">&#xE703;</Run>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16">Spoofer</Run>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Border
+                x:Name="ButtonBarSelection"
+                Width="6"
+                Height="26"
+                Margin="10,64,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#dde6e8"
+                BorderThickness="2"
+                CornerRadius="2"
+                MouseLeftButtonDown="Drag"
+                Visibility="Visible" />
+            <Grid x:Name="MainAreaFrame" Margin="120,50,00,35">
+                <ScrollViewer x:Name="Scroll">
+                    <Frame
+                        x:Name="MainArea"
+                        NavigationUIVisibility="Hidden"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                </ScrollViewer>
+            </Grid>
+            <Border
+                x:Name="Profile"
+                Width="102"
+                Height="53"
+                Margin="9,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Background="#FF121219"
+                BorderBrush="#FF282832"
+                BorderThickness="2"
+                CornerRadius="2.5"
+                MouseLeftButtonDown="Drag">
+                <TextBlock
+                    x:Name="Username"
+                    Margin="-2,-2,-2,-2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="/Assets/Fonts/#Poppins Medium"
+                    FontSize="14"
+                    Foreground="#FF414150"
+                    TextAlignment="Center"><Run
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        Foreground="#FF414150"
+                        Text="{Binding CurrentUserName, FallbackValue=username}" /></TextBlock>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

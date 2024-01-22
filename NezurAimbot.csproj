@@ -1,0 +1,129 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Condition=" '$(EAZFUSCATOR_NET_HOME)' != '' and Exists('$(EAZFUSCATOR_NET_HOME)\Integration\MSBuild\Eazfuscator.NET.targets') " Project="$(EAZFUSCATOR_NET_HOME)\Integration\MSBuild\Eazfuscator.NET.targets" />
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows7.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<UseWPF>true</UseWPF>
+    <ApplicationManifest>ApplicationConfig\app.manifest</ApplicationManifest>
+	<Optimize>False</Optimize>
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+	<Platforms>AnyCPU;x64</Platforms>
+	<ApplicationIcon>nezur_logo.ico</ApplicationIcon>
+	<AssemblyName>Nezur</AssemblyName>
+	<Company>Offical Copy Of Nezur</Company>
+	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+    <PropertyGroup>
+    <!-- Eazfuscator.NET is integrated with this project at MSBuild level: https://help.gapotchenko.com/eazfuscator.net/kb/100036 -->
+    <EazfuscatorIntegration>MSBuild</EazfuscatorIntegration>
+    <EazfuscatorActiveConfiguration>Release</EazfuscatorActiveConfiguration>
+    <EazfuscatorCompatibilityVersion>2023.4</EazfuscatorCompatibilityVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AiModel\NewFile1.txt" />
+    <None Remove="AiModel\O" />
+    <None Remove="Assets\Fonts\Font Awesome 5 Brands-Regular-400.otf" />
+    <None Remove="Assets\Fonts\Font Awesome 5 Free-Regular-400.otf" />
+    <None Remove="Assets\Fonts\Font Awesome 5 Free-Solid-900.otf" />
+    <None Remove="Assets\Fonts\fontisto-brands.ttf" />
+    <None Remove="Assets\Fonts\ionicons.ttf" />
+    <None Remove="Assets\Fonts\materialdesignicons-webfont.ttf" />
+    <None Remove="Assets\Fonts\Montserrat SemiBold 600.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Black.ttf" />
+    <None Remove="Assets\Fonts\Poppins-BlackItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Bold.ttf" />
+    <None Remove="Assets\Fonts\Poppins-BoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-ExtraBold.ttf" />
+    <None Remove="Assets\Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-ExtraLight.ttf" />
+    <None Remove="Assets\Fonts\Poppins-ExtraLightItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Italic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Light.ttf" />
+    <None Remove="Assets\Fonts\Poppins-LightItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Medium.ttf" />
+    <None Remove="Assets\Fonts\Poppins-MediumItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Regular.ttf" />
+    <None Remove="Assets\Fonts\Poppins-SemiBold.ttf" />
+    <None Remove="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Poppins-Thin.ttf" />
+    <None Remove="Assets\Fonts\Poppins-ThinItalic.ttf" />
+    <None Remove="Assets\Fonts\Segoe Fluent Icons.ttf" />
+    <None Remove="Interface\Loader\SettingsBackground.png" />
+    <None Remove="NewFile1.txt" />
+    <None Remove="Static\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="nezur_logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Accord.Math" Version="3.8.2-alpha" />
+    <PackageReference Include="Accord.Statistics" Version="3.8.2-alpha" />
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="KdTree" Version="1.4.1" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.16.3" />
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
+     <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Graphics\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Fonts\Font Awesome 5 Brands-Regular-400.otf" />
+    <Resource Include="Assets\Fonts\Font Awesome 5 Free-Regular-400.otf" />
+    <Resource Include="Assets\Fonts\Font Awesome 5 Free-Solid-900.otf" />
+    <Resource Include="Assets\Fonts\fontisto-brands.ttf" />
+    <Resource Include="Assets\Fonts\ionicons.ttf" />
+    <Resource Include="Assets\Fonts\materialdesignicons-webfont.ttf" />
+    <Resource Include="Assets\Fonts\Montserrat SemiBold 600.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Black.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-BlackItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Bold.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-BoldItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-ExtraBold.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-ExtraLight.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-ExtraLightItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Italic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Light.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-LightItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Medium.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-MediumItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-SemiBold.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-Thin.ttf" />
+    <Resource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
+    <Resource Include="Assets\Fonts\Segoe Fluent Icons.ttf" />
+    <Resource Include="Interface\Loader\SettingsBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

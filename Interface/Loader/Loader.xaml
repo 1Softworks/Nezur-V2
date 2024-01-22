@@ -1,0 +1,71 @@
+﻿<Window x:Class="NezurAimbot.Interface.Loader.Loader"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NezurAimbot.Interface.Loader"
+        mc:Ignorable="d"
+        Title="Loader" Loaded="Window_Loaded" Height="330" Width="550" ResizeMode="NoResize" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Drag">
+    <Border x:Name="Main" BorderBrush="#FF282832" BorderThickness="1" Background="#FF0A0A0F" CornerRadius="5">
+
+        <Grid>
+            <Label Content="Nezur" FontSize="25" FontFamily="/Assets/Fonts/#Poppins Medium" Margin="10,2,457,280">
+                <Label.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#d8315b" Offset="0"/>
+                        <GradientStop Color="#dde6e8" Offset="1.5"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <TextBlock Text="ALPHA" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="13" Margin="90,20,0,0" Width="220" Height="15" Foreground="#FF7A7A96" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <Border x:Name="DownloadStep" Visibility="Hidden">
+                <Grid>
+                    <Label x:Name="DW" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="20" Content="Installing dependencies, please wait..." Foreground="#FFABABAB" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </Border> 
+         
+            <Border x:Name="KeyStep">
+                <Grid>
+                    <PasswordBox x:Name="Input" Style="{DynamicResource PasswordBox}" Background="#FF13131D" Margin="85,165,85,139" CaretBrush="#FF979C9D"/>
+                    <TextBlock Text="Enter a key to launch Nezur" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="0,132,0,0" Width="224" Height="20" Foreground="#FF7A7A96" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Button x:Name="Enter" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,196,348,0" FontSize="12" Content="Enter Key" Style="{DynamicResource Key}" Height="28" Width="115" Click="Enter_Click"/>
+                    <Button x:Name="Get" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,196,0,0" FontSize="12" Content="Get Key" Style="{DynamicResource Key}" Height="28" Width="115" Click="Get_Click"/>
+                    <Button x:Name="Discord" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,196,85,0" FontSize="12" Content="Join Discord" Style="{DynamicResource Key}" Height="28" Width="115" Click="Discord_Click"/>
+                </Grid>
+            </Border>
+
+            <Button x:Name="Exit" Content="&#xE8BB;" 
+HorizontalAlignment="Right" VerticalAlignment="Top" 
+Width="25" Height="26" 
+BorderBrush="{x:Null}"
+Background="Transparent"
+Foreground="#FF3E3E4D" 
+Click="Exit_Click" 
+FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
+Margin="0,2,1,0" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
+RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Button x:Name="Maximize" Content="&#xE92D;" 
+HorizontalAlignment="Right" VerticalAlignment="Top" 
+Width="25" Height="26" 
+BorderBrush="{x:Null}"
+Background="Transparent"
+Foreground="#FF3E3E4D" 
+Click="Maximize_Click" 
+FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
+Margin="0,2,31,0" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
+RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Button x:Name="Minimize" Content="&#xE921;" 
+HorizontalAlignment="Right" VerticalAlignment="Top" 
+Width="25" Height="26" 
+VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+BorderBrush="{x:Null}"
+Background="Transparent"
+Foreground="#FF3E3E4D" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
+Click="Minimize_Click" 
+FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
+Margin="0,2,61,0" 
+RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Grid>
+    </Border>
+</Window>
