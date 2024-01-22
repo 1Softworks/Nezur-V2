@@ -1,21 +1,24 @@
-﻿<Page x:Class="NezurAimbot.Interface.InterfacePages.ToolsPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:NezurAimbot.Interface.InterfacePages"
-      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-      Title="ToolsPage" >
+﻿<Page
+    x:Class="NezurAimbot.Interface.InterfacePages.ToolsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NezurAimbot.Interface.InterfacePages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ToolsPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
     <Page.Resources>
         <Style x:Key="AnimatedButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="#dde6e8"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="#dde6e8" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" CornerRadius="2">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -25,18 +28,20 @@
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#FF414150"
-                            Duration="0:0:0.2" />
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="Background.Color"
+                                    To="#FF414150"
+                                    Duration="0:0:0.2" />
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.EnterActions>
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#FF282832"
-                            Duration="0:0:0.2" />
+                                <ColorAnimation
+                                    Storyboard.TargetProperty="Background.Color"
+                                    To="#FF282832"
+                                    Duration="0:0:0.2" />
                             </Storyboard>
                         </BeginStoryboard>
                     </Trigger.ExitActions>
@@ -45,821 +50,936 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <WrapPanel Orientation="Horizontal" Margin="0,0,0,-1">
-            <Grid x:Name="FOV"
-            Width="235" 
-            Height="250"
-            Margin="15,15,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left">
+        <WrapPanel Margin="0,0,0,-1" Orientation="Horizontal">
+            <Grid
+                x:Name="FOV"
+                Width="235"
+                Height="250"
+                Margin="15,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Border
+                    Width="235"
+                    Height="250"
                     Background="Transparent"
                     BorderBrush="#FF282832"
                     BorderThickness="1.5"
-                    CornerRadius="2.5"
-                    Width="235" 
-                    Height="250">
+                    CornerRadius="2.5">
                     <Label
                         x:Name="ModelBar"
-                        Content="Model"
-                        Foreground="#dde6e8"
                         Height="30"
-                        FontSize="15"
-                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        VerticalAlignment="Top">
+                        Content="Model"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
                         <Label.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="ModelOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="ModelOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
                             </LinearGradientBrush>
                         </Label.BorderBrush>
                         <Label.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
                             </LinearGradientBrush>
                         </Label.Background>
                         <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
                         </Label.BorderThickness>
                     </Label>
                 </Border>
-                <Grid Height="30"
+                <Grid
+                    Height="30"
                     Margin="0,40,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Collect Data"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <CheckBox x:Name="CollectDataCheck"
-                        Click="CollectDataCheck_Click"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Collect Data" />
+                    <CheckBox
+                        x:Name="CollectDataCheck"
+                        Margin="0,0,5,0"
                         HorizontalAlignment="Right"
-                        Margin="0,0,5,0"/>
+                        Click="CollectDataCheck_Click" />
                 </Grid>
-                <Grid Height="30"
-    Margin="0,80,0,0"
-    VerticalAlignment="Top">
-                    <Border
-        Background="#FF282832"
-        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Aim Prediction"
-        Foreground="#dde6e8"
-        FontFamily="/Assets/Fonts/#Poppins Regualr"
-        VerticalAlignment="Center"
-        Margin="10,0,0,0"/>
-                    <CheckBox x:Name="PredictionCheck"
-        Click="PredictionCheck_Click"
-        HorizontalAlignment="Right"
-        Margin="0,0,5,0"/>
+                <Grid
+                    Height="30"
+                    Margin="0,80,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Aim Prediction" />
+                    <CheckBox
+                        x:Name="PredictionCheck"
+                        Margin="0,0,5,0"
+                        HorizontalAlignment="Right"
+                        Click="PredictionCheck_Click" />
                 </Grid>
-                <Grid Height="45"
+                <Grid
+                    Height="45"
                     Margin="0,120,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="AI Confidence"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
                         VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="AIConfidenceValue"
-                        Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="AI Confidence" />
+                    <TextBlock
+                        x:Name="AIConfidenceValue"
+                        Margin="0,5,10,0"
                         VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="AIConfidenceSlider" Style="{StaticResource Horizontal_Slider}" 
-                        TickFrequency="1" Maximum="100" Minimum="0"
-                        VerticalAlignment="Center" Margin="10,20,10,0"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="AIConfidenceSlider"
+                        Margin="10,20,10,0"
+                        VerticalAlignment="Center"
                         IsSnapToTickEnabled="True"
-                        ValueChanged="AIConfidenceSlider_ValueChanged"/>
+                        Maximum="100"
+                        Minimum="0"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="1"
+                        ValueChanged="AIConfidenceSlider_ValueChanged" />
                 </Grid>
-                <Grid Height="30"
-Margin="0,175,0,0"
-VerticalAlignment="Top">
-                    <Border
-    Background="#FF282832"
-    Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Must Have Keybind Down"
-    Foreground="#dde6e8"
-    FontFamily="/Assets/Fonts/#Poppins Regualr"
-    VerticalAlignment="Center"
-    Margin="10,0,0,0"/>
-                    <CheckBox x:Name="KeybindCheck"
-    Click="KeybindCheck_Click"
-    HorizontalAlignment="Right"
-    Margin="0,0,5,0"/>
+                <Grid
+                    Height="30"
+                    Margin="0,175,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Must Have Keybind Down" />
+                    <CheckBox
+                        x:Name="KeybindCheck"
+                        Margin="0,0,5,0"
+                        HorizontalAlignment="Right"
+                        Click="KeybindCheck_Click" />
                 </Grid>
             </Grid>
-            <Grid x:Name="AimAssist"
-                Width="235" 
+            <Grid
+                x:Name="AimAssist"
+                Width="235"
                 Height="250"
                 Margin="15,15,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Border
+                    Width="235"
+                    Height="250"
                     Background="Transparent"
                     BorderBrush="#FF282832"
                     BorderThickness="1.5"
-                    CornerRadius="2.5"
-                    Width="235" 
-                    Height="250">
+                    CornerRadius="2.5">
                     <Label
                         x:Name="AimAssistBar"
-                        Content="Aim Assist"
-                        Foreground="#dde6e8"
                         Height="30"
-                        FontSize="15"
-                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        VerticalAlignment="Top">
+                        Content="Aim Assist"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
                         <Label.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="AimAssistColorOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="AimAssistColorOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
                             </LinearGradientBrush>
                         </Label.BorderBrush>
                         <Label.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
                             </LinearGradientBrush>
                         </Label.Background>
                         <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
                         </Label.BorderThickness>
                     </Label>
                 </Border>
-                <Grid Height="30"
+                <Grid
+                    Height="30"
                     Margin="0,40,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Enable Aim Assist"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <CheckBox x:Name="EnableAimAssistCheck"
-                        Click="EnableAimAssistCheck_Click"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Enable Aim Assist" />
+                    <CheckBox
+                        x:Name="EnableAimAssistCheck"
+                        Margin="0,0,5,0"
                         HorizontalAlignment="Right"
-                        Margin="0,0,5,0"/>
+                        Click="EnableAimAssistCheck_Click" />
                 </Grid>
-                <Grid Height="45"
+                <Grid
+                    Height="45"
                     Margin="0,80,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Aim Smoothness"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
                         VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="AimAssistSmoothnessValue"
-                        Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Aim Smoothness" />
+                    <TextBlock
+                        x:Name="AimAssistSmoothnessValue"
+                        Margin="0,5,10,0"
                         VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="AimAssistSmoothnessSlider" Style="{StaticResource Horizontal_Slider}" 
-                        TickFrequency="0.1" Maximum="1" Minimum="0.1"
-                        VerticalAlignment="Center" Margin="10,20,10,0"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="AimAssistSmoothnessSlider"
+                        Margin="10,20,10,0"
+                        VerticalAlignment="Center"
                         IsSnapToTickEnabled="True"
-                        ValueChanged="AimAssistSmoothnessSlider_ValueChanged"/>
+                        Maximum="1"
+                        Minimum="0.1"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="0.1"
+                        ValueChanged="AimAssistSmoothnessSlider_ValueChanged" />
                 </Grid>
-                <Grid Height="45"
+                <Grid
+                    Height="45"
                     Margin="0,135,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Horizontal Offset"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
                         VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="XOffsetValue"
-                        Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Horizontal Offset (Left/Right)" />
+                    <TextBlock
+                        x:Name="XOffsetValue"
+                        Margin="0,5,10,0"
                         VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="XOffsetSlider" Style="{StaticResource Horizontal_Slider}" 
-                    TickFrequency="1" Maximum="250" Minimum="-50"
-                    VerticalAlignment="Center" Margin="10,20,10,0"
-                    IsSnapToTickEnabled="True"
-                    ValueChanged="XOffsetSlider_ValueChanged"/>
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="XOffsetSlider"
+                        Margin="10,20,10,0"
+                        VerticalAlignment="Center"
+                        IsSnapToTickEnabled="True"
+                        Maximum="250"
+                        Minimum="-50"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="1"
+                        ValueChanged="XOffsetSlider_ValueChanged" />
                 </Grid>
-                <Grid Height="45"
+                <Grid
+                    Height="45"
                     Margin="0,190,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Vertical Offset"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
                         VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="YOffsetValue"
-                        Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Vertical Offset (Up/Down)" />
+                    <TextBlock
+                        x:Name="YOffsetValue"
+                        Margin="0,5,10,0"
                         VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="YOffsetSlider" Style="{StaticResource Horizontal_Slider}" 
-                    TickFrequency="1" Maximum="250" Minimum="-50"
-                    VerticalAlignment="Center" Margin="10,20,10,0"
-                    IsSnapToTickEnabled="True"
-                    ValueChanged="YOffsetSlider_ValueChanged"/>
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="YOffsetSlider"
+                        Margin="10,20,10,0"
+                        VerticalAlignment="Center"
+                        IsSnapToTickEnabled="True"
+                        Maximum="250"
+                        Minimum="-50"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="1"
+                        ValueChanged="YOffsetSlider_ValueChanged" />
                 </Grid>
             </Grid>
-            <Grid x:Name="TriggerBot"
-                Width="235" 
+            <Grid
+                x:Name="TriggerBot"
+                Width="235"
                 Height="250"
                 Margin="15,15,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Border
+                    Width="235"
+                    Height="250"
                     Background="Transparent"
                     BorderBrush="#FF282832"
                     BorderThickness="1.5"
-                    CornerRadius="2.5"
-                    Width="235" 
-                    Height="250">
-                    <Label x:Name="TriggerBotBar"
-                        Content="Trigger Bot"
-                        Foreground="#dde6e8"
-                        Height="30"
-                        FontSize="13"
-                        FontFamily="/Assets/Fonts/#Poppins Medium"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" VerticalAlignment="Top">
-                        <Label.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="TriggerBotOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
-                            </LinearGradientBrush>
-                        </Label.BorderBrush>
-                        <Label.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
-                            </LinearGradientBrush>
-                        </Label.Background>
-                        <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
-                        </Label.BorderThickness>
-                    </Label>
-                </Border>
-                <Grid Height="30"
-                    Margin="0,40,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Enable Trigger Bot"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <CheckBox x:Name="EnableTriggerBotCheck"
-                        Click="EnableTriggerBotCheck_Click"
-                        HorizontalAlignment="Right"
-                        Margin="0,0,5,0"/>
-                </Grid>
-                <Grid Height="45"
-                    Margin="0,80,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25">
-                    </Border>
-                    <TextBlock Text="Trigger Bot Delay"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="TriggerBotDelayValue"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="TriggerBotDelaySlider" Style="{StaticResource Horizontal_Slider}" 
-                            TickFrequency="0.1" Maximum="1" Minimum="0.1"
-                            VerticalAlignment="Center" Margin="10,20,10,0"
-                            IsSnapToTickEnabled="True"
-                            ValueChanged="Slider_ValueChanged"/>
-                </Grid>
-            </Grid>
-            <Grid x:Name="ESPWS"
-            Width="235" 
-            Height="250"
-            Margin="15,15,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left">
-                <Border
-                Background="Transparent"
-                BorderBrush="#FF282832"
-                BorderThickness="1.5"
-                CornerRadius="2.5"
-                Width="235" 
-                Height="250">
-                    <Label x:Name="AutoClickerBar"
-                    Content="External Features"
-                    Foreground="#dde6e8"
-                    Height="30"
-                    FontSize="15"
-                    FontFamily="/Assets/Fonts/#Poppins Medium"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center" VerticalAlignment="Top">
-                        <Label.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="AutoClickerOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
-                            </LinearGradientBrush>
-                        </Label.BorderBrush>
-                        <Label.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
-                            </LinearGradientBrush>
-                        </Label.Background>
-                        <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
-                        </Label.BorderThickness>
-                    </Label>
-                </Border>
-                <Grid Height="30"
-                    Margin="0,40,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText2"
-                        Text="ESP And Hitbox Viewer"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton4"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="Start"
-                        Click="MouseFixButton4_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
-                </Grid>
-                <Grid Height="30"
-                    Margin="0,80,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText5"
-                        Text="Start ESP Keybind"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton5"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="CTRL + F8"
-                        Click="MouseFixButton_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
-                </Grid>
-                <Grid Height="30"
-                    Margin="0,120,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText6"
-                        Text="WalkSpeed Modifier"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton6"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="Start"
-                        Click="MouseFixButton6_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
-                </Grid>
-                <Grid Height="30"
-                    Margin="0,160,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText7"
-                        Text="Noclip"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton7"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="Start"
-                        Click="MouseFixButton7_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
-                </Grid>
-                <Grid Height="30"
-                    Margin="0,200,0,0"
-                    VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText8"
-                        Text="Reset Roblox Client"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton8"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="Reset"
-                        Click="MouseFixButton8_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
-                </Grid>
-            </Grid>
-            <Grid x:Name="Spoofer"
-    Width="235" 
-    Height="250"
-    Margin="15,15,0,0"
-    VerticalAlignment="Top"
-    HorizontalAlignment="Left">
-                <Border
-        Background="Transparent"
-        BorderBrush="#FF282832"
-        BorderThickness="1.5"
-        CornerRadius="2.5"
-        Width="235" 
-        Height="250">
+                    CornerRadius="2.5">
                     <Label
-            x:Name="SpooferBar"
-            Content="Extra Tools"
-            Foreground="#dde6e8"
-            Height="30"
-            FontSize="15"
-            FontFamily="/Assets/Fonts/#Poppins Medium"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            VerticalAlignment="Top">
-                        <Label.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="SpoofOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
-                            </LinearGradientBrush>
-                        </Label.BorderBrush>
-                        <Label.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
-                            </LinearGradientBrush>
-                        </Label.Background>
-                        <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
-                        </Label.BorderThickness>
-                    </Label>
-                </Border>
-                <Grid Height="30"
-        Margin="0,40,0,0"
-        VerticalAlignment="Top"/>
-                <Grid Height="30"
-Margin="0,40,0,0"
-VerticalAlignment="Top">
-                    <Border
-    Background="#FF282832"
-    Opacity="0.25">
-                    </Border>
-                    <TextBlock x:Name="mText"
-    Text="UWP Mouse Fix"
-    Foreground="#dde6e8"
-    FontFamily="/Assets/Fonts/#Poppins Regualr"
-    VerticalAlignment="Center"
-    Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton"
-    FontFamily="/Assets/Fonts/#Poppins Regular"
-    Foreground="#dde6e8" 
-    Background="#FF282832" BorderThickness="0"
-    HorizontalAlignment="Right" VerticalAlignment="Top"
-    Margin="0,5,5,0"
-    FontSize="12"
-    Content="Start"
-    Click="MouseFixButton_Click"
-    Style="{StaticResource AnimatedButtonStyle}"
-    Height="20" Width="65"/>
-                </Grid>
-                <Grid Height="30"
-Margin="0,80,0,0"
-VerticalAlignment="Top">
-                    <Border
-    Background="#FF282832"
-    Opacity="0.25">
-                    </Border>
-                    <TextBlock x:Name="S"
-    Text="Join Support Server"
-    Foreground="#dde6e8"
-    FontFamily="/Assets/Fonts/#Poppins Regualr"
-    VerticalAlignment="Center"
-    Margin="10,0,0,0"/>
-                    <Button x:Name="ColorAimbotButton"
-    FontFamily="/Assets/Fonts/#Poppins Regular"
-    Foreground="#dde6e8" 
-    Background="#FF282832" BorderThickness="0"
-    HorizontalAlignment="Right" VerticalAlignment="Top"
-    Margin="0,5,5,0"
-    FontSize="12"
-    Content="Join"
-    Click="SupportButton_Click"
-    Style="{StaticResource AnimatedButtonStyle}"
-    Height="20" Width="65"/>
-                </Grid>
-            </Grid>
-            <Grid x:Name="ColorAimbot"
-                Width="235" 
-                Height="250"
-                Margin="15,15,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
-                <Border
-                    Background="Transparent"
-                    BorderBrush="#FF282832"
-                    BorderThickness="1.5"
-                    CornerRadius="2.5"
-                    Width="235" 
-                    Height="250">
-                    <Label
-                        x:Name="ColorAimbotBar"
-                        Content="Color Aimbot"
-                        Foreground="#dde6e8"
+                        x:Name="TriggerBotBar"
                         Height="30"
-                        FontSize="15"
-                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        VerticalAlignment="Top">
+                        Content="Trigger Bot"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="13"
+                        Foreground="#dde6e8">
                         <Label.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="ColorAimbotOffset" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="TriggerBotOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
                             </LinearGradientBrush>
                         </Label.BorderBrush>
                         <Label.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
                             </LinearGradientBrush>
                         </Label.Background>
                         <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
                         </Label.BorderThickness>
                     </Label>
                 </Border>
-                <Grid Height="90"
-                    VerticalAlignment="Center"/>
-                <Grid Height="30"
+                <Grid
+                    Height="30"
                     Margin="0,40,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="CA1"
-                        Text="Start Color Aimbot"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="SupportButton1"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,5,5,0"
-                        FontSize="12"
-                        Content="Start"
-                        Click="ColorAimbotButton_Click"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Enable Trigger Bot" />
+                    <CheckBox
+                        x:Name="EnableTriggerBotCheck"
+                        Margin="0,0,5,0"
+                        HorizontalAlignment="Right"
+                        Click="EnableTriggerBotCheck_Click" />
                 </Grid>
-                <Grid Height="30"
+                <Grid
+                    Height="45"
                     Margin="0,80,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText3"
-                        Text="Color"
-                        Foreground="#dde6e8"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
+                        VerticalAlignment="Top"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Trigger Bot Delay" />
+                    <TextBlock
+                        x:Name="TriggerBotDelayValue"
+                        Margin="0,5,10,0"
+                        VerticalAlignment="Top"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="TriggerBotDelaySlider"
+                        Margin="10,20,10,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton1"
-                        FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="154,0,0,0"
-                        FontSize="12"
-                        Content="Bright Blue"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="76"/>
+                        IsSnapToTickEnabled="True"
+                        Maximum="1"
+                        Minimum="0.1"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="0.1"
+                        ValueChanged="Slider_ValueChanged" />
                 </Grid>
-                <Grid Height="30"
+            </Grid>
+            <Grid
+                x:Name="ESPWS"
+                Width="235"
+                Height="250"
+                Margin="15,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Border
+                    Width="235"
+                    Height="250"
+                    Background="Transparent"
+                    BorderBrush="#FF282832"
+                    BorderThickness="1.5"
+                    CornerRadius="2.5">
+                    <Label
+                        x:Name="AutoClickerBar"
+                        Height="30"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Content="External Features"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
+                        <Label.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="AutoClickerOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
+                            </LinearGradientBrush>
+                        </Label.BorderBrush>
+                        <Label.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
+                            </LinearGradientBrush>
+                        </Label.Background>
+                        <Label.BorderThickness>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
+                        </Label.BorderThickness>
+                    </Label>
+                </Border>
+                <Grid
+                    Height="30"
+                    Margin="0,40,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText2"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="ESP And Hitbox Viewer" />
+                    <Button
+                        x:Name="MouseFixButton4"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="MouseFixButton4_Click"
+                        Content="Start"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
+                    Margin="0,80,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText5"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Start ESP Keybind" />
+                    <Button
+                        x:Name="MouseFixButton5"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="MouseFixButton_Click"
+                        Content="CTRL + F8"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
                     Margin="0,120,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText1"
-                        Text="Activate Key"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText6"
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton2"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="WalkSpeed Modifier" />
+                    <Button
+                        x:Name="MouseFixButton6"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="MouseFixButton6_Click"
+                        Content="Start"
                         FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="165,0,0,0"
                         FontSize="12"
-                        Content="F5"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
                 </Grid>
-                <Grid Height="30"
+                <Grid
+                    Height="30"
                     Margin="0,160,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText4"
-                        Text="Lock Key"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText7"
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <Button x:Name="MouseFixButton3"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Noclip" />
+                    <Button
+                        x:Name="MouseFixButton7"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="MouseFixButton7_Click"
+                        Content="Start"
                         FontFamily="/Assets/Fonts/#Poppins Regular"
-                        Foreground="#dde6e8" 
-                        Background="#FF282832" BorderThickness="0"
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="165,0,0,0"
                         FontSize="12"
-                        Content="Shift"
-                        Style="{StaticResource AnimatedButtonStyle}"
-                        Height="20" Width="65"/>
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
                 </Grid>
-                <Grid Height="44"
+                <Grid
+                    Height="30"
                     Margin="0,200,0,0"
                     VerticalAlignment="Top">
-                    <Border
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText8"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Reset Roblox Client" />
+                    <Button
+                        x:Name="MouseFixButton8"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
                         Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock x:Name="mText5_Copy"
-    Text="Go to your arsenal settings and turn&#xa;
-player outlines on and set it to blue"
-    Foreground="#dde6e8"
-    FontFamily="/Assets/Fonts/#Poppins Regualr"
-    VerticalAlignment="Top"
-    Margin="5,4,5,0" Height="36"/>
+                        BorderThickness="0"
+                        Click="MouseFixButton8_Click"
+                        Content="Reset"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+            </Grid>
+            <Grid
+                x:Name="Spoofer"
+                Width="235"
+                Height="250"
+                Margin="15,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Border
+                    Width="235"
+                    Height="250"
+                    Background="Transparent"
+                    BorderBrush="#FF282832"
+                    BorderThickness="1.5"
+                    CornerRadius="2.5">
+                    <Label
+                        x:Name="SpooferBar"
+                        Height="30"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Content="Extra Tools"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
+                        <Label.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="SpoofOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
+                            </LinearGradientBrush>
+                        </Label.BorderBrush>
+                        <Label.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
+                            </LinearGradientBrush>
+                        </Label.Background>
+                        <Label.BorderThickness>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
+                        </Label.BorderThickness>
+                    </Label>
+                </Border>
+                <Grid
+                    Height="30"
+                    Margin="0,40,0,0"
+                    VerticalAlignment="Top" />
+                <Grid
+                    Height="30"
+                    Margin="0,40,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="UWP Mouse Fix" />
+                    <Button
+                        x:Name="MouseFixButton"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="MouseFixButton_Click"
+                        Content="Start"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
+                    Margin="0,80,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="S"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Join Support Server" />
+                    <Button
+                        x:Name="ColorAimbotButton"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="SupportButton_Click"
+                        Content="Join"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+            </Grid>
+            <Grid
+                x:Name="ColorAimbot"
+                Width="235"
+                Height="250"
+                Margin="15,15,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Border
+                    Width="235"
+                    Height="250"
+                    Background="Transparent"
+                    BorderBrush="#FF282832"
+                    BorderThickness="1.5"
+                    CornerRadius="2.5">
+                    <Label
+                        x:Name="ColorAimbotBar"
+                        Height="30"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Content="Color Aimbot"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
+                        <Label.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="ColorAimbotOffset" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
+                            </LinearGradientBrush>
+                        </Label.BorderBrush>
+                        <Label.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
+                            </LinearGradientBrush>
+                        </Label.Background>
+                        <Label.BorderThickness>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
+                        </Label.BorderThickness>
+                    </Label>
+                </Border>
+                <Grid Height="90" VerticalAlignment="Center" />
+                <Grid
+                    Height="30"
+                    Margin="0,40,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="CA1"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Start Color Aimbot" />
+                    <Button
+                        x:Name="SupportButton1"
+                        Width="65"
+                        Height="20"
+                        Margin="0,5,5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Click="ColorAimbotButton_Click"
+                        Content="Start"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
+                    Margin="0,80,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText3"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Color" />
+                    <Button
+                        x:Name="MouseFixButton1"
+                        Width="76"
+                        Height="20"
+                        Margin="154,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Content="Bright Blue"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
+                    Margin="0,120,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText1"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Activate Key" />
+                    <Button
+                        x:Name="MouseFixButton2"
+                        Width="65"
+                        Height="20"
+                        Margin="165,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Content="F5"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="30"
+                    Margin="0,160,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText4"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Lock Key" />
+                    <Button
+                        x:Name="MouseFixButton3"
+                        Width="65"
+                        Height="20"
+                        Margin="165,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="#FF282832"
+                        BorderThickness="0"
+                        Content="Shift"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        FontSize="12"
+                        Foreground="#dde6e8"
+                        Style="{StaticResource AnimatedButtonStyle}" />
+                </Grid>
+                <Grid
+                    Height="44"
+                    Margin="0,200,0,0"
+                    VerticalAlignment="Top">
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        x:Name="mText5_Copy"
+                        Height="36"
+                        Margin="5,4,5,0"
+                        VerticalAlignment="Top"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Go to your arsenal settings and turn&#xa; player outlines on and set it to blue" />
 
 
                 </Grid>
             </Grid>
-            <Grid x:Name="AutoClicker_Copy"
-                Width="235" 
+            <Grid
+                x:Name="AutoClicker_Copy"
+                Width="235"
                 Height="250"
                 Margin="15,15,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Border
+                    Width="235"
+                    Height="250"
                     Background="Transparent"
                     BorderBrush="#FF282832"
                     BorderThickness="1.5"
-                    CornerRadius="2.5"
-                    Width="235" 
-                    Height="250">
-                    <Label x:Name="AutoClickerBar1"
-                        Content="Auto Clicker"
-                        Foreground="#dde6e8"
+                    CornerRadius="2.5">
+                    <Label
+                        x:Name="AutoClickerBar1"
                         Height="30"
-                        FontSize="15"
-                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" VerticalAlignment="Top">
+                        VerticalContentAlignment="Center"
+                        Content="Auto Clicker"
+                        FontFamily="/Assets/Fonts/#Poppins Medium"
+                        FontSize="15"
+                        Foreground="#dde6e8">
                         <Label.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Offset="0" Color="#FF282832"/>
-                                <GradientStop x:Name="AutoClickerOffset1" Offset="0.5" Color="#dde6e8"/>
-                                <GradientStop Offset="1" Color="#FF282832"/>
+                                <GradientStop Offset="0" Color="#FF282832" />
+                                <GradientStop x:Name="AutoClickerOffset1" Offset="0.5" Color="#dde6e8" />
+                                <GradientStop Offset="1" Color="#FF282832" />
                             </LinearGradientBrush>
                         </Label.BorderBrush>
                         <Label.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Offset="-.25" Color="#FF282832"/>
-                                <GradientStop Offset=".75" Color="#FF0A0A0F"/>
+                                <GradientStop Offset="-.25" Color="#FF282832" />
+                                <GradientStop Offset=".75" Color="#FF0A0A0F" />
                             </LinearGradientBrush>
                         </Label.Background>
                         <Label.BorderThickness>
-                            <Thickness Bottom="1.5" Top="0" Left="0" Right="0"/>
+                            <Thickness
+                                Bottom="1.5"
+                                Left="0"
+                                Right="0"
+                                Top="0" />
                         </Label.BorderThickness>
                     </Label>
                 </Border>
-                <Grid Height="30"
+                <Grid
+                    Height="30"
                     Margin="0,40,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock Text="Enable Mouse Auto Clicker"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
-                        Margin="10,0,0,0"/>
-                    <CheckBox x:Name="EnableAutoClickCheck"
-                        Click="EnableAutoClickCheck_Click"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Enable Mouse Auto Clicker" />
+                    <CheckBox
+                        x:Name="EnableAutoClickCheck"
+                        Margin="0,0,5,0"
                         HorizontalAlignment="Right"
-                        Margin="0,0,5,0"/>
+                        Click="EnableAutoClickCheck_Click" />
                 </Grid>
-                <Grid Height="45"
+                <Grid
+                    Height="45"
                     Margin="0,80,0,0"
                     VerticalAlignment="Top">
-                    <Border
-                        Background="#FF282832"
-                        Opacity="0.25"/>
-                    <TextBlock Text="Click Delay"
-                        Foreground="#dde6e8"
-                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    <Border Background="#FF282832" Opacity="0.25" />
+                    <TextBlock
+                        Margin="10,5,0,0"
                         VerticalAlignment="Top"
-                        Margin="10,5,0,0"/>
-                    <TextBlock x:Name="AutoClickerDelayValue1"
-                        Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        Text="Click Delay" />
+                    <TextBlock
+                        x:Name="AutoClickerDelayValue1"
+                        Margin="0,5,10,0"
                         VerticalAlignment="Top"
-                        TextAlignment="Right"
-                        Margin="0,5,10,0"/>
-                    <Slider x:Name="AutoClickerDelaySlider" Style="{StaticResource Horizontal_Slider}" 
-                        TickFrequency="0.1" Maximum="10" Minimum="0.1"
-                        VerticalAlignment="Center" Margin="10,20,10,0"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        Foreground="#dde6e8"
+                        TextAlignment="Right" />
+                    <Slider
+                        x:Name="AutoClickerDelaySlider"
+                        Margin="10,20,10,0"
+                        VerticalAlignment="Center"
                         IsSnapToTickEnabled="True"
-                        ValueChanged="AutoClickerDelaySlider_ValueChanged"/>
+                        Maximum="10"
+                        Minimum="0.1"
+                        Style="{StaticResource Horizontal_Slider}"
+                        TickFrequency="0.1"
+                        ValueChanged="AutoClickerDelaySlider_ValueChanged" />
                 </Grid>
             </Grid>
         </WrapPanel>
