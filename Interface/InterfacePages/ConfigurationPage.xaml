@@ -79,5 +79,27 @@
             Click="OpenModelFolder_Click"
             Style="{StaticResource AnimatedButtonStyle}"
             Height="20" Width="125"/>
+        <Button x:Name="MakeAModel"
+            FontFamily="/Assets/Fonts/#Poppins Regular"
+            Foreground="#dde6e8" 
+            Background="#FF282832" BorderThickness="0"
+            HorizontalAlignment="Right" VerticalAlignment="Top"
+            Margin="0,5,130,0"
+            FontSize="12"
+            Content="Make a Model"
+            Click="MakeAModel_Click"
+            Style="{StaticResource AnimatedButtonStyle}"
+            Height="20" Width="90"/>
+        <Button x:Name="PublicModels"
+            FontFamily="/Assets/Fonts/#Poppins Regular"
+            Foreground="#dde6e8" 
+            Background="#FF282832" BorderThickness="0"
+            HorizontalAlignment="Right" VerticalAlignment="Top"
+            Margin="0,5,225,0"
+            FontSize="12"
+            Content="More Models"
+            Click="PublicModels_Click"
+            Style="{StaticResource AnimatedButtonStyle}"
+            Height="20" Width="90"/>
     </Grid>
 </Page>

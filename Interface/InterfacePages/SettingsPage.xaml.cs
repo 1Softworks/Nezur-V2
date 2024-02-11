@@ -1,14 +1,25 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml;
+using Microsoft.CognitiveServices.Speech;
 
 namespace NezurAimbot.Interface.InterfacePages;
 
 public partial class SettingsPage : Page
 {
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+    private const uint SWP_NOMOVE = 0x0002;
+    private const uint SWP_NOSIZE = 0x0001;
+    private const uint TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
+
     public SettingsPage()
     {
         InitializeComponent();
@@ -19,6 +30,9 @@ public partial class SettingsPage : Page
     {
         EnableFOVCheck.IsChecked = MiscSettings["ShowFOV"];
         EnableStreamable.IsChecked = MiscSettings["Streamable"];
+        EnableTopMost.IsChecked = MiscSettings["TopMost"];
+        
+        //EnableDevMode.IsChecked = MiscSettings["DevMode"];
         LoadSliderSetting(GlobalSettings.FOVSize, FOVSizeValue, FOVSizeSlider);
         LoadSliderSetting(GlobalSettings.FOVThickness, FOVThickessValue, FOVThickness);
         LoadSliderSetting(GlobalSettings.FOVOpacity, FOVOpacityValue, FOVOpacity);
@@ -78,6 +92,9 @@ public partial class SettingsPage : Page
         GlobalSettings.Theme = DefaultThemeColor;
         Properties.Settings.Default.AutoClickerDelay = DefaultSettings["AutoClicker"];
         GlobalSettings.Streamable = false;
+        GlobalSettings.TopMost = false;
+        GlobalSettings.VC = false;
+        //GlobalSettings.DevMode = false;
         LoadActiveSettings();
         MainInterface.ResetBinding();
     }
@@ -126,6 +143,9 @@ public partial class SettingsPage : Page
             Properties.Settings.Default.Trigger_Delay = loadedConfig.TriggerDelay;
             GlobalSettings.ConfidenceThreshold = (float)loadedConfig.Confidence / 100;
             GlobalSettings.Streamable = loadedConfig.Streamable;
+            GlobalSettings.TopMost = loadedConfig.TopMost;
+       
+            //GlobalSettings.DevMode = loadedConfig.DevMode;
         }
         LoadActiveSettings();
     }
@@ -150,6 +170,8 @@ public partial class SettingsPage : Page
             save.TriggerDelay = Properties.Settings.Default.Trigger_Delay;
             save.Confidence = GlobalSettings.ConfidenceThreshold * 100;
             save.Streamable = GlobalSettings.Streamable;
+            save.TopMost = GlobalSettings.TopMost;
+            //save.DevMode = GlobalSettings.DevMode;
         }
 
         // Prompt the user for a file name using a SaveFileDialog
@@ -237,15 +259,201 @@ public partial class SettingsPage : Page
             MiscSettings["Streamable"] = false;
         }
     }
-}
+    private void KillRobloxPlayerBetaProcess()
+    {
+        try
+        {
+            Process[] processes = Process.GetProcessesByName("RobloxPlayerBeta");
+            foreach (Process process in processes)
+            {
+                process.Kill();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while trying to kill the process: {ex.Message}");
+        }
+    }
+    public string RobloxVersion
+    {
+        get
+        {
+            using (WebClient Http = new WebClient { })
+                return Http.DownloadString("http://setup.roblox.com/version");
+        }
+    }
+    private async void ResetButton1_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Kill the RobloxPlayerBeta.exe process if it is running
+            KillRobloxPlayerBetaProcess();
 
-public class ConfigSave
-{
-    public double FovSize { get; set; }
-    public double Smoothness { get; set; }
-    public double XOffset { get; set; }
-    public double YOffset { get; set; }
-    public double TriggerDelay { get; set; }
-    public double Confidence { get; set; }
-    public bool Streamable { get; set; }
+            // Rest of the code
+            string userName = Environment.UserName;
+
+            string directoryPath = $@"C:\Users\{userName}\AppData\Local\Roblox\Versions\{RobloxVersion}\ClientSettings";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
+            string url = "https://dhs.army/fps.txt";
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = await client.GetStringAsync(url);
+                File.WriteAllText(filePath, jsonContent);
+            }
+
+            MessageBox.Show("Please rejoin roblox.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
+    }
+
+    private void EnableTopMost_Click(object sender, RoutedEventArgs e)
+    {
+        if (EnableTopMost.IsChecked == true)
+        {
+            GlobalSettings.TopMost = true;
+            MiscSettings["TopMost"] = true;
+            IntPtr mainWindowHandle = Process.GetCurrentProcess().MainWindowHandle;
+            SetWindowPos(mainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, TOPMOST_FLAGS);
+        }
+        else if (EnableTopMost.IsChecked == false)
+        {
+            GlobalSettings.TopMost = false;
+            MiscSettings["TopMost"] = false;
+            IntPtr mainWindowHandle = Process.GetCurrentProcess().MainWindowHandle;
+            SetWindowPos(mainWindowHandle, new IntPtr(-2), 0, 0, 0, 0, TOPMOST_FLAGS);
+        }
+    }
+    //private SpeechRecognizer speechRecognizer;
+
+    //private void EnableVC_Click(object sender, RoutedEventArgs e)
+    //{
+    //    if (EnableVC.IsChecked == true)
+    //    {
+    //        GlobalSettings.VC = true;
+    //        MiscSettings["VC"] = true;
+    //        InitializeSpeechRecognizer();
+    //    }
+    //    else if (EnableVC.IsChecked == false)
+    //    {
+    //        GlobalSettings.VC = false;
+    //        MiscSettings["VC"] = false;
+    //        DisposeSpeechRecognizer();
+    //    }
+    //}
+
+    //private void InitializeSpeechRecognizer()
+    //{
+    //    try
+    //    {
+    //        var speechConfig = SpeechConfig.FromSubscription("YourAzureSubscriptionKey", "YourAzureServiceRegion");
+    //        speechRecognizer = new SpeechRecognizer(speechConfig);
+
+    //        // Handle speech recognition events
+    //        speechRecognizer.Recognized += SpeechRecognizer_Recognized;
+
+    //        // Start continuous recognition
+    //        speechRecognizer.SessionStarted += SpeechRecognizer_SessionStarted;
+    //        speechRecognizer.Recognizing += SpeechRecognizer_Recognizing;
+    //        speechRecognizer.SessionStopped += SpeechRecognizer_SessionStopped;
+
+    //        speechRecognizer.StartContinuousRecognitionAsync().Wait();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        MessageBox.Show($"Error initializing speech recognizer: {ex.Message}");
+    //    }
+    //}
+
+    //private void DisposeSpeechRecognizer()
+    //{
+    //    try
+    //    {
+    //        if (speechRecognizer != null)
+    //        {
+    //            // Stop recognition and close the recognizer
+    //            speechRecognizer.StopContinuousRecognitionAsync().Wait();
+    //            speechRecognizer.Dispose();
+    //            speechRecognizer = null;
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        MessageBox.Show($"Error disposing speech recognizer: {ex.Message}");
+    //    }
+    //}
+
+    //private void SpeechRecognizer_SessionStarted(object sender, SessionEventArgs e)
+    //{
+    //    // Handle session started event
+    //}
+
+    //private void SpeechRecognizer_Recognizing(object sender, SpeechRecognitionEventArgs e)
+    //{
+    //    // Handle recognizing event
+    //}
+
+    //private void SpeechRecognizer_SessionStopped(object sender, SessionEventArgs e)
+    //{
+    //    // Handle session stopped event
+    //}
+
+    //private void SpeechRecognizer_Recognized(object sender, SpeechRecognitionEventArgs e)
+    //{
+    //    try
+    //    {
+    //        // Use the Dispatcher to marshal the call to the UI thread
+    //        Dispatcher.Invoke(() =>
+    //        {
+    //            // Handle the recognized command
+    //            string command = e.Result.Text.ToLower();
+
+    //            switch (command)
+    //            {
+    //                case "hi":
+    //                    GlobalSettings.TopMost = true;
+    //                    MiscSettings["TopMost"] = true;
+    //                    EnableTopMost.IsChecked = true;
+    //                    break;
+
+    //                case "disable voice command":
+    //                    // Handle the "disable voice command" command
+    //                    // Add any additional logic specific to the "disable voice command" command
+    //                    break;
+
+    //                // Add more cases for other commands as needed
+
+    //                default:
+    //                    // Handle unrecognized commands if needed
+    //                    break;
+    //            }
+    //        });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // Log or display the exception details
+    //        MessageBox.Show($"Error handling speech command: {ex.Message}");
+    //    }
+    //}
 }
+public class ConfigSave
+    {
+        public double FovSize { get; set; }
+        public double Smoothness { get; set; }
+        public double XOffset { get; set; }
+        public double YOffset { get; set; }
+        public double TriggerDelay { get; set; }
+        public double Confidence { get; set; }
+        public bool Streamable { get; set; }
+        public bool TopMost { get; set; }
+        //public bool DevMode { get; set; }
+
+    }

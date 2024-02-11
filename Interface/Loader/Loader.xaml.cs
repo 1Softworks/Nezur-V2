@@ -7,34 +7,22 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
 using Newtonsoft.Json;
 
 namespace NezurAimbot.Interface.Loader
 {
-    public partial class Loader : Window
-    {
-        public Loader() => InitializeComponent();
 
+    public partial class Loader : Window
+    {  
+        public Loader() => InitializeComponent();
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (WebClient Http = new WebClient { })
+            UpdateDate();
+            Process.Start(new ProcessStartInfo
             {
-                if (LocalVersion != Http.DownloadString("https://nezur.net/version.txt"))
-                {
-                    MessageBox.Show("It Appears You're Using An Older Version Of Nezur, Please Visit Our Discord Or https://nezur.net To Download Our Latest Release.", "Nezur",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://nezur.net",
-                        UseShellExecute = true
-                    });
-
-                    this.Close();
-                }
-            }
-
+                FileName = "https://1cheats.com/store/product/41-nezur-key-bypass-lifetime-license/",
+                UseShellExecute = true
+            });
             KeyStep.Visibility = Visibility.Visible;
             DownloadStep.Visibility = Visibility.Hidden;
 
@@ -42,16 +30,9 @@ namespace NezurAimbot.Interface.Loader
 
             for (int i = 0; i < Directories.Length; ++i)
                 Directory.CreateDirectory(Directories[i]);
-
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://1cheats.com/store/product/41-nezur-key-bypass-lifetime-license/",
-                UseShellExecute = true
-            });
-
-            Main.Visibility = Visibility.Hidden;
-            await LoadAnimations();
-        }
+                Main.Visibility = Visibility.Hidden;
+                await LoadAnimations();
+         }
 
         private async Task LoadAnimations()
         {
@@ -60,7 +41,10 @@ namespace NezurAimbot.Interface.Loader
             await Animations.AnimateVisibility(Main, Visibility.Visible);
             await Animations.AnimateVisibility(Main, Visibility.Visible);
         }
-
+        private void UpdateDate()
+        {
+            Date.Text = DateTime.Now.ToString("MM/dd/yy");
+        }
         public async Task DownloadFileAsync(string Url, string Destination, string Name)
         {
             if (File.Exists(Destination) == true)
@@ -68,6 +52,10 @@ namespace NezurAimbot.Interface.Loader
 
             using (WebClient Http = new WebClient { Proxy = null })
             {
+                Splitter.Visibility = Visibility.Hidden;
+                Splitter3.Visibility = Visibility.Hidden;
+                Splitter2.Visibility = Visibility.Hidden;
+                Splitter1.Visibility = Visibility.Hidden;
                 Http.DownloadProgressChanged += (s, e) => DW.Content = $"Downloading {Name} - {e.ProgressPercentage}%";
                 
                 await Http.DownloadFileTaskAsync(
@@ -75,48 +63,51 @@ namespace NezurAimbot.Interface.Loader
                     Destination);
             }
         }
-
+        public static api KeyAuthApp = new api(
+           name: "Nezur",
+           ownerid: "2UWe8CI1m7",
+           secret: "da0fa5c2ed5edc166033d7296f3343118d8401fd552aafae3b231d896b558dd9",
+           version: "1.0"
+       );
+        public string RobloxVersion
+        {
+            get
+            {
+                using (WebClient Http = new WebClient { })
+                    return Http.DownloadString("https://dhs.army/rblxver.txt");
+            }
+        }
         private async void Enter_Click(object sender, RoutedEventArgs e)
         {
-            string Key = "53aDhasjS39S_Djk9UASD9uWJI_sDJgWSU9sDGHW_sdg";
-            string Key2 = "(53aDhasjS)39S)_D(jk)#9UASD9uWJI$)#(s)DJg)WS#%U9sDGHW)_#sdg";
 
-            string UserInput = Input.Password;
+            KeyAuthApp.init();
+            string key = Input.Password;
+            KeyAuthApp.license(key);
 
-            if (UserInput == Key || UserInput == Key2)
+            if (KeyAuthApp.response.success)
             {
                 KeyStep.Visibility = Visibility.Hidden;
                 DownloadStep.Visibility = Visibility.Visible;
 
                 await DownloadFileAsync("https://raw.githubusercontent.com/0x9374698765254342/Models/main/Resources/DirectML.dll", "DirectML.dll", "DirectML.dll");
                 await DownloadFileAsync("https://raw.githubusercontent.com/0x9374698765254342/Models/main/Resources/onnxruntime.dll", "onnxruntime.dll", "onnxruntime.dll");
-
-                if (Directory.Exists($"{Environment.CurrentDirectory}\\Bin\\Models"))
-                    Directory.Delete($"{Environment.CurrentDirectory}\\Bin\\Models", true);
-
-                await DownloadFileAsync("https://nezur.net/immuneishot.zip", $"{Environment.CurrentDirectory}\\Bin\\Models.zip", "Models");
-                ZipFile.ExtractToDirectory($"{Environment.CurrentDirectory}\\Bin\\Models.zip", $"{Environment.CurrentDirectory}\\Bin\\Models");
-
-                File.Delete($"{Environment.CurrentDirectory}\\Bin\\Models.zip");
-
-                if (File.Exists($"{Environment.CurrentDirectory}\\Bin\\Models\\Universal.onnx") != true)
-                    MessageBox.Show("It Appears Your Isp Might Have Blocked Downloading Our Models, Please Use A Vpn And Try Again.", "Nezur",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-
+                KeyAuthApp.log("Correct Key Used");
                 new MainInterface().Show();
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Your key is incorrect!");
+                MessageBox.Show(KeyAuthApp.response.message);
+                KeyAuthApp.log("Incorrect Key Used");
             }
         }
+
 
         private void Get_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://nezur.net/NEZURV2",
+                FileName = "https://key.nezur.net",
                 UseShellExecute = true
             });
         }
@@ -132,14 +123,23 @@ namespace NezurAimbot.Interface.Loader
 
         private void Exit_Click(object sender, RoutedEventArgs e) => Close();
 
-        private void Maximize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = isMaximized ? previousState : WindowState.Maximized;
-            isMaximized = !isMaximized;
-        }
+        //private void Maximize_Click(object sender, RoutedEventArgs e)
+        //{
+        //    WindowState = isMaximized ? previousState : WindowState.Maximized;
+        //    isMaximized = !isMaximized;
+        //}
 
         private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
         private void Drag(object sender, RoutedEventArgs e) => DragMove();
+
+        private void KeyBypass_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://1cheats.com/store/product/41-nezur-key-bypass-lifetime-license/",
+                UseShellExecute = true
+            });
+        }
     }
 }

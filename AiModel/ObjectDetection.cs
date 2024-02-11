@@ -2,9 +2,7 @@
 using KdTree.Math;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
-
 using NezurAimbot.AiModel;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,7 +24,7 @@ namespace NezurAimbot
         private InferenceSession Model;
         private List<string> OutputNames;
 
-        //private MemoryStream Stream = new MemoryStream(GlobalSettings.ImageSize * GlobalSettings.ImageSize * 4);
+        private MemoryStream Stream = new MemoryStream(GlobalSettings.ImageSize * GlobalSettings.ImageSize * 4);
 
         public static ObjectDetection Instance { get; private set; }
 
@@ -201,7 +199,7 @@ namespace NezurAimbot
         public void Dispose()
         {
             Model?.Dispose();
-            //Stream?.Dispose();
+            Stream?.Dispose();
         }
     }
 }

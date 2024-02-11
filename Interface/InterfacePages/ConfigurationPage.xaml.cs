@@ -82,4 +82,23 @@ public partial class ConfigurationPage : Page
         LoadListBox();
         SelectorListBox.SelectionChanged += new SelectionChangedEventHandler(SelectorListBox_SelectionChanged);
     }
+
+    private void PublicModels_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Please head to our Discord server and go to the Models tab to find more models");
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://discord.gg/nezurai",
+            UseShellExecute = true
+        });
+    }
+
+    private void MakeAModel_Click(object sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://docs.nezur.net/tutorials/training-models",
+            UseShellExecute = true
+        });
+    }
 }

@@ -6,32 +6,123 @@
         xmlns:local="clr-namespace:NezurAimbot.Interface.Loader"
         mc:Ignorable="d"
         Title="Loader" Loaded="Window_Loaded" Height="330" Width="550" ResizeMode="NoResize" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Drag">
-    <Border x:Name="Main" BorderBrush="#FF282832" BorderThickness="1" Background="#FF0A0A0F" CornerRadius="5">
+    <Border 
+        x:Name="Main"   Background="#FF0A0A0F"
+  BorderBrush="#FF282832"
+  BorderThickness="2"
+  CornerRadius="2.5"
+  MouseLeftButtonDown="Drag">
 
         <Grid>
-            <Label Content="Nezur" FontSize="25" FontFamily="/Assets/Fonts/#Poppins Medium" Margin="10,2,457,280">
+            <Label Content="Nezur" FontSize="25" FontFamily="/Assets/Fonts/#Poppins Medium" Margin="10,-6,448,286">
                 <Label.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#d8315b" Offset="0"/>
-                        <GradientStop Color="#dde6e8" Offset="1.5"/>
+                        <GradientStop Offset="0" Color="#FFFF3838" />
+                        <GradientStop Offset="1.5" Color="#dde6e8" />
+                        <GradientStop Color="#FFFF6F4E" Offset="1"/>
                     </LinearGradientBrush>
                 </Label.Foreground>
             </Label>
-            <TextBlock Text="ALPHA" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="13" Margin="90,20,0,0" Width="220" Height="15" Foreground="#FF7A7A96" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock Text="BETA" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="13" Margin="91,12,0,0" Width="216" Height="15" Foreground="#FF7A7A96" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <Border x:Name="DownloadStep" Visibility="Hidden">
                 <Grid>
                     <Label x:Name="DW" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="20" Content="Installing dependencies, please wait..." Foreground="#FFABABAB" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
-            </Border> 
-         
+            </Border>
+
             <Border x:Name="KeyStep">
                 <Grid>
-                    <PasswordBox x:Name="Input" Style="{DynamicResource PasswordBox}" Background="#FF13131D" Margin="85,165,85,139" CaretBrush="#FF979C9D"/>
-                    <TextBlock Text="Enter a key to launch Nezur" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="0,132,0,0" Width="224" Height="20" Foreground="#FF7A7A96" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <Button x:Name="Enter" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,196,348,0" FontSize="12" Content="Enter Key" Style="{DynamicResource Key}" Height="28" Width="115" Click="Enter_Click"/>
-                    <Button x:Name="Get" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,196,0,0" FontSize="12" Content="Get Key" Style="{DynamicResource Key}" Height="28" Width="115" Click="Get_Click"/>
-                    <Button x:Name="Discord" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF979C9D" Background="#FF1B1B28" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,196,85,0" FontSize="12" Content="Join Discord" Style="{DynamicResource Key}" Height="28" Width="115" Click="Discord_Click"/>
+                    <PasswordBox x:Name="Input" Style="{DynamicResource PasswordBox}" Background="#FF13131D" Margin="290,112,25,192" CaretBrush="#FF979C9D" Foreground="#FF535371" Panel.ZIndex="1">
+
+                    </PasswordBox>
+                    <TextBlock Text="Enter a key to launch Nezur" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="296,66,0,0" Width="224" Height="20" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <Button x:Name="Enter" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF8888A2" Background="#FF101017" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="290,0,0,0" FontSize="12" Content="Enter Key" Style="{DynamicResource Key}" Height="28" Width="231" Click="Enter_Click" BorderBrush="Red" BorderThickness="1" Panel.ZIndex="1">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0.3" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button x:Name="Get" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF8888A2" Background="#FF101017" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="290,192,0,0" FontSize="12" Content="Get Key" Style="{DynamicResource Key}" Height="28" Width="231" Click="Get_Click" Panel.ZIndex="1">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0.3" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button x:Name="Discord" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF8888A2" Background="#FF101017" BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,235,25,0" FontSize="12" Content="Join Discord" Style="{DynamicResource Key}" Height="28" Width="231" Click="Discord_Click" Panel.ZIndex="1">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0.3" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+
+                    </Button>
+                    <TextBlock x:Name="Status" Text="Status:" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="50,60,0,0" Width="58" Height="20" Foreground="#FF848492" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="StatusUD" Text="Undetected" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="110,60,0,0" Width="96" Height="20" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <Rectangle x:Name="Outline" HorizontalAlignment="Left" Height="268" Margin="10,48,0,0" VerticalAlignment="Top" Width="250" Fill="#FF0C0C12" RadiusX="5" RadiusY="5">
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF13131B" Offset="0.003"/>
+                                <GradientStop Color="#FF20202D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                    </Rectangle>
+                    <Rectangle x:Name="Outline2" HorizontalAlignment="Left" Height="268" Margin="280,48,0,0" VerticalAlignment="Top" Width="250" Fill="#FF0C0C12" RadiusX="5" RadiusY="5">
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF13131B" Offset="0.003"/>
+                                <GradientStop Color="#FF20202D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                    </Rectangle>
+                    <TextBlock x:Name="DateTitle" Text="Date:" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="63,105,0,0" Width="45" Height="20" Foreground="#FF848492" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="Date" Text="20/29/24" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="112,105,0,0" Width="78" Height="20" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="Website" Text="Website:" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="50,0,0,0" Width="71" Height="20" Foreground="#FF848492" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="WebsiteLink" Text="NEZUR.NET" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="126,0,0,0" Width="89" Height="20" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1"/>
+                    <Button
+                    Panel.ZIndex="1" Width="230" VerticalAlignment="Top" Style="{DynamicResource Key}" x:Name="KeyBypass" Margin="0,245,296,0" Height="28" HorizontalAlignment="Right" FontSize="12" FontFamily="/Assets/Fonts/#Poppins Regular" Foreground="#FF8888A2" Content="Get Lifetime Key" Click="KeyBypass_Click" BorderThickness="0" Background="#FF101017">
+                        <Button.Effect>
+                            <DropShadowEffect Color="#FFFF3A00" ShadowDepth="0" BlurRadius="60" Opacity="0.1"/>
+                        </Button.Effect>
+                    </Button>
+                    <TextBlock x:Name="Expiry" Text="Key Expiry:" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="43,202,0,0" Width="92" Height="30" Foreground="#FF848492" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="WTime" Text="24 Hours" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="16" Margin="135,202,0,0" Width="96" Height="20" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="Extra" Text="Created by 1Cheats.com and Nezur.net" FontFamily="/Assets/Fonts/#Poppins Medium" FontSize="10" Margin="32,287,0,0" Width="199" Height="14" Foreground="#FF515171" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1"/>
                 </Grid>
             </Border>
 
@@ -45,16 +136,6 @@ Click="Exit_Click"
 FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
 Margin="0,2,1,0" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
 RenderOptions.BitmapScalingMode="HighQuality"/>
-            <Button x:Name="Maximize" Content="&#xE92D;" 
-HorizontalAlignment="Right" VerticalAlignment="Top" 
-Width="25" Height="26" 
-BorderBrush="{x:Null}"
-Background="Transparent"
-Foreground="#FF3E3E4D" 
-Click="Maximize_Click" 
-FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
-Margin="0,2,31,0" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
-RenderOptions.BitmapScalingMode="HighQuality"/>
             <Button x:Name="Minimize" Content="&#xE921;" 
 HorizontalAlignment="Right" VerticalAlignment="Top" 
 Width="25" Height="26" 
@@ -64,8 +145,80 @@ Background="Transparent"
 Foreground="#FF3E3E4D" Style="{DynamicResource DefaultSideBarAnimatedButtonStyle}"
 Click="Minimize_Click" 
 FontSize="15" FontFamily="/Assets/Fonts/#Segoe Fluent Icons" 
-Margin="0,2,61,0" 
+Margin="0,2,31,0" 
 RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Ellipse x:Name="Glow" HorizontalAlignment="Left" Height="326" Margin="-308,-326,0,0" VerticalAlignment="Top" Width="328" Opacity="0.3" StrokeThickness="0" Fill="Black" Panel.ZIndex="-1" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.Resources>
+                    <Color x:Key="GlowColor">White</Color>
+                </Ellipse.Resources>
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="30.97"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+                <Ellipse.Effect>
+                    <DropShadowEffect x:Name="GlowMain" Color="#FFFF3A00" ShadowDepth="150" Direction="0" BlurRadius="100" Opacity="0.2" />
+                </Ellipse.Effect>
+            </Ellipse>
+            <GridSplitter x:Name="Splitter1" HorizontalAlignment="Left" Height="326" Margin="268,0,0,0" VerticalAlignment="Center" Width="2" Foreground="{x:Null}" IsEnabled="False">
+                <GridSplitter.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF181823"/>
+                        <GradientStop Color="#FF0A0A0F" Offset="1"/>
+                    </RadialGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <GridSplitter x:Name="Splitter" HorizontalAlignment="Left" Height="243" Margin="134,-29,0,0" VerticalAlignment="Top" Width="2" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" IsEnabled="False">
+                <GridSplitter.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.188"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </GridSplitter.RenderTransform>
+                <GridSplitter.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF181823"/>
+                        <GradientStop Color="#FF0C0C12" Offset="1"/>
+                    </RadialGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <GridSplitter x:Name="Splitter2" HorizontalAlignment="Left" Height="242" Margin="134,18,0,0" VerticalAlignment="Top" Width="2" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" IsEnabled="False">
+                <GridSplitter.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.188"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </GridSplitter.RenderTransform>
+                <GridSplitter.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF181823"/>
+                        <GradientStop Color="#FF0C0C12" Offset="1"/>
+                    </RadialGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+            <GridSplitter x:Name="Splitter3" HorizontalAlignment="Left" Height="242" Margin="134,67,0,0" VerticalAlignment="Top" Width="2" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" IsEnabled="False">
+                <GridSplitter.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.188"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </GridSplitter.RenderTransform>
+                <GridSplitter.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF181823"/>
+                        <GradientStop Color="#FF0C0C12" Offset="1"/>
+                    </RadialGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
         </Grid>
     </Border>
 </Window>

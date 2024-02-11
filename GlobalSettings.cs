@@ -78,9 +78,26 @@
             set => SetProperty("TriggerBot", value);
         }
 
+        public static bool TopMost
+        {
+            get => GetProperty<bool>("TopMost", false);
+            set => SetProperty("TopMost", value);
+        }
+
+        public static bool VC
+        {
+            get => GetProperty<bool>("VC", false);
+            set => SetProperty("VC", value);
+        }
+        //public static bool DevMode
+        //{
+        //    get => GetProperty<bool>("DevMode", false);
+        //    set => SetProperty("DevMode", value);
+        //}
+
         public static string Theme
         {
-            get => GetProperty<string>("Theme", "#DDE6E8");
+            get => GetProperty<string>("Theme", "#fa2a38");
             set => SetProperty("Theme", value);
         }
 

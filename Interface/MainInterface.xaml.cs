@@ -11,10 +11,13 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using Microsoft.Windows.Themes;
+
 
 namespace NezurAimbot.Interface;
 
 public partial class MainInterface : Window
+
 {
     private bool AnimationActive = false;
     private int ActivePage;
@@ -35,15 +38,44 @@ public partial class MainInterface : Window
     private ObjectDetection AIModel;
     private MouseMovement mouseMovement;
 
+    Color themeColor = (Color)ColorConverter.ConvertFromString(GlobalSettings.Theme);
+   
+    public static api KeyAuthApp = new api(
+         name: "Nezur",
+         ownerid: "2UWe8CI1m7",
+         secret: "da0fa5c2ed5edc166033d7296f3343118d8401fd552aafae3b231d896b558dd9",
+         version: "1.0"
+     );
     public MainInterface()
     {
         InitializeComponent();
         mouseMovement = new MouseMovement();
-
         Username.Text = $"Hello\n{Environment.UserName}";
-
+        SetThemeColors();
+        fovOverlay = new FovOverlay();
+        fovOverlay.Hide();
+        System.Windows.Forms.Timer themeTimer = new System.Windows.Forms.Timer();
+        themeTimer.Interval = 10;
+        themeTimer.Tick += ThemeTimer_Tick;
+        themeTimer.Start();
         InitializeRPC();
+        KeyAuthApp.init();
+        KeyAuthApp.check();
     }
+
+    private void ThemeTimer_Tick(object sender, EventArgs e)
+    {
+        SetThemeColors();
+    }
+
+    private void SetThemeColors()
+    {
+        Color themeColor = (Color)ColorConverter.ConvertFromString(GlobalSettings.Theme);
+        SolidColorBrush themeBrush = new SolidColorBrush(themeColor);
+        GlowMain.Color = themeColor;
+        NezurTitle.Foreground = themeBrush;
+    }
+
 
     private async void Main_Loaded(object sender, RoutedEventArgs e)
     {
@@ -60,7 +92,6 @@ public partial class MainInterface : Window
     private async Task LoadStartup()
     {
         Main.Visibility = Visibility.Hidden;
-
         await LoadAnimations();
         await FirstLoadupToolsPage();
         LoadBindingManager();
@@ -68,8 +99,6 @@ public partial class MainInterface : Window
         InitializeAutoClickTimer();
         predictionManager = new ModelPrediction();
         predictionManager.InitializeKalmanFilter();
-        fovOverlay = new FovOverlay();
-        fovOverlay.Hide();
         StartDetection();
     }
 
@@ -92,6 +121,8 @@ public partial class MainInterface : Window
         bindingManager.OnBindingPressed += (binding) => { GlobalSettings.IsHoldingBinding = true; };
         bindingManager.OnBindingReleased += (binding) => { GlobalSettings.IsHoldingBinding = false; };
     }
+
+
 
     public static void ResetBinding() => bindingManager.SetupDefault(Properties.Settings.Default.Current_Binding);
 
@@ -350,7 +381,7 @@ public partial class MainInterface : Window
 
         ModelCapture.Start();
     }
-
+ 
     private void StopDetection()
     {
         if (cts != null)
@@ -358,7 +389,10 @@ public partial class MainInterface : Window
             cts.Cancel();
         }
     }
-
+   private void StartColorLoop()
+    {
+      
+    }
     public async void LoadModel()
     {
         string modelPath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin", "Models"), LoadedModel);
@@ -396,16 +430,16 @@ public partial class MainInterface : Window
         Client.SetPresence(new RichPresence
         {
             Details = "Nezur",
-            State = "Best aim assistant tool out there!",
+            State = "Roblox's #1 External",
             Timestamps = Timestamps.Now,
             Buttons = new DiscordRPC.Button[] {
-                new() { Label = "Download", Url = "https://1cheats.com", },
+                new() { Label = "Download (NEZUR.NET)", Url = "https://nezur.net", },
                 new() { Label = "Join the Discord", Url = "https://discord.gg/nezurai", },
             },
             Assets = new Assets
             {
                 LargeImageKey = "nezur",
-                LargeImageText = "nezur",
+                LargeImageText = "NEZUR.NET",
             },
         });
     }

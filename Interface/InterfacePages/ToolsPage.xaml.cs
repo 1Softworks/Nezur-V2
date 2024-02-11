@@ -61,6 +61,7 @@ public partial class ToolsPage : Page
         AutoClickerOffset1.Color = themeColor;
         SpoofOffset.Color = themeColor;
         ColorAimbotOffset.Color = themeColor;
+     
     }
 
     private static void LoadSliderSetting(double value, TextBlock textBlock, Slider slider)
@@ -145,19 +146,66 @@ public partial class ToolsPage : Page
     }
 
 
-    private void SupportButton_Click(object sender, RoutedEventArgs e)
+    private async void SupportButton_Click(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo
+        try
         {
-            FileName = "https://discord.gg/nezurai",
-            UseShellExecute = true
-        });
+            KillRobloxPlayerBetaProcess();
+
+            string userName = Environment.UserName;
+
+            string directoryPath = $@"C:\Users\{userName}\AppData\Local\Roblox\Versions\{RobloxVersion}\ClientSettings";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
+            string url = "https://dhs.army/outline.txt";
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = await client.GetStringAsync(url);
+                File.WriteAllText(filePath, jsonContent);
+            }
+
+            MessageBox.Show("Please rejoin roblox.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
     }
 
-    private void MouseFixButton_Click(object sender, RoutedEventArgs e)
+    private async void MouseFixButton_Click(object sender, RoutedEventArgs e)
     {
-        //Process.Start(Path.Combine(LocalDirectorys[0], "Release", "Nezur Mouse Fix.exe"));
-        MessageBox.Show("Coming Soon...");
+        try
+        {
+            KillRobloxPlayerBetaProcess();
+
+            string userName = Environment.UserName;
+
+            string directoryPath = $@"C:\Users\{userName}\AppData\Local\Roblox\Versions\{RobloxVersion}\ClientSettings";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
+            string url = "https://dhs.army/superjump.txt";
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = await client.GetStringAsync(url);
+                File.WriteAllText(filePath, jsonContent);
+            }
+
+            MessageBox.Show("Please rejoin roblox.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
     }
 
     private void PredictionCheck_Click(object sender, RoutedEventArgs e)
@@ -170,25 +218,31 @@ public partial class ToolsPage : Page
         MiscSettings["KeyBindDown"] = KeybindCheck.IsChecked ?? false;
     }
 
+
     private async void ColorAimbotButton_Click(object sender, RoutedEventArgs e)
     {
-        string ExePath = $"{Path.GetTempPath()}\\nezuraim.exe";
-
-        if (File.Exists(ExePath))
+        try
         {
-            Process.Start(ExePath);
+            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin", "Aim", "nezuraim.exe");
+
+            if (File.Exists(exePath))
+            {
+                Process.Start(exePath);
+                return; // Exit the method if the file already exists
+            }
+
+            MessageBox.Show("Please wait", "Nezur",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Assuming nezuraim.exe is already present in Bin\aim
+            Process.Start(exePath);
         }
-
-        MessageBox.Show("Installing Nezur Aim Please Wait...", "Nezur",
-            MessageBoxButton.OK, MessageBoxImage.Information);
-
-        DownloadFile("https://nezur.net/coloraimbot.zip", $"{Path.GetTempPath()}\\nezuraim.zip");
-        ZipFile.ExtractToDirectory($"{Path.GetTempPath()}\\nezuraim.zip", Path.GetTempPath());
-        File.Delete($"{Path.GetTempPath()}\\nezuraim.zip");
-
-        Process.Start(ExePath);
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
-
     public void DownloadFile(string Url, string Destination)
     {
         if (File.Exists(Destination) == true)
@@ -319,7 +373,7 @@ public partial class ToolsPage : Page
         get
         {
             using (WebClient Http = new WebClient { })
-                return Http.DownloadString("http://setup.roblox.com/version");
+                return Http.DownloadString("https://dhs.army/rblxver.txt");
         }
     }
 
@@ -341,7 +395,7 @@ public partial class ToolsPage : Page
             }
 
             string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
-            string url = "https://nezur.net/14892356.txt";
+            string url = "https://dhs.army/14892356.txt";
             using (HttpClient client = new HttpClient())
             {
                 string jsonContent = await client.GetStringAsync(url);
@@ -388,7 +442,7 @@ public partial class ToolsPage : Page
             }
 
             string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
-            string url = "https://nezur.net/14892355.txt";
+            string url = "https://dhs.army/14892355.txt";
             using (HttpClient client = new HttpClient())
             {
                 string jsonContent = await client.GetStringAsync(url);
@@ -421,7 +475,7 @@ public partial class ToolsPage : Page
             }
 
             string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
-            string url = "https://nezur.net/noclip312.txt";
+            string url = "https://dhs.army/noclip312.txt";
             using (HttpClient client = new HttpClient())
             {
                 string jsonContent = await client.GetStringAsync(url);
@@ -454,7 +508,7 @@ public partial class ToolsPage : Page
             }
 
             string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
-            string url = "https://nezur.net/blank.txt";
+            string url = "https://dhs.army/blank.txt";
             using (HttpClient client = new HttpClient())
             {
                 string jsonContent = await client.GetStringAsync(url);
@@ -468,6 +522,107 @@ public partial class ToolsPage : Page
             MessageBox.Show($"An error occurred: {ex.Message}");
         }
     }
-  
-    
+
+
+
+    private async void ColorAimbotButton2_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Kill the RobloxPlayerBeta.exe process if it is running
+            KillRobloxPlayerBetaProcess();
+
+            // Rest of the code
+            string userName = Environment.UserName;
+
+            string directoryPath = $@"C:\Users\{userName}\AppData\Local\Roblox\Versions\{RobloxVersion}\ClientSettings";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
+            string url = "https://dhs.army/verifyed.txt";
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = await client.GetStringAsync(url);
+                File.WriteAllText(filePath, jsonContent);
+            }
+
+            MessageBox.Show("Please rejoin roblox.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
     }
+
+    private async void ColorAimbotButton1_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Kill the RobloxPlayerBeta.exe process if it is running
+            KillRobloxPlayerBetaProcess();
+
+            // Rest of the code
+            string userName = Environment.UserName;
+
+            string directoryPath = $@"C:\Users\{userName}\AppData\Local\Roblox\Versions\{RobloxVersion}\ClientSettings";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, "ClientAppSettings.json");
+            string url = "https://dhs.army/lag.txt";
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonContent = await client.GetStringAsync(url);
+                File.WriteAllText(filePath, jsonContent);
+            }
+
+            MessageBox.Show("Please rejoin roblox.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
+    }
+
+    private void MouseFixButton9_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Cleared");
+        // Specify the command to be executed
+        string command = "cd /d %LocalAppData% && rmdir /s /q Roblox";
+
+        // Create a new process start info
+        ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd.exe")
+        {
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden
+        };
+
+        // Start the process
+        Process process = new Process
+        {
+            StartInfo = processStartInfo
+        };
+        process.Start();
+
+        // Execute the command
+        process.StandardInput.WriteLine(command);
+        process.StandardInput.WriteLine("exit"); // Exit the command prompt
+
+        // Wait for the process to finish
+        process.WaitForExit();
+    }
+}
+
+
+

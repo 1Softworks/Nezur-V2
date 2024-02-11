@@ -10,7 +10,7 @@ public class Data
 {
     public static IntPtr WindowHandle = IntPtr.Zero;
 
-    public static string LocalVersion = "2.0.6";
+    public static string LocalVersion = "2.0.7";
     public static WindowState previousState;
     public static bool isMaximized = false;
     public static int TimeSinceLastClick { get; set; }
@@ -43,7 +43,9 @@ public class Data
         ["SpecialEducation"] = false,
         ["KeyBindDown"] = true,
         ["AutoClicker"] = false,
-        ["Streamable"] = false
+        ["Streamable"] = false,
+        ["TopMost"] = false,
+        ["VC"] = false
     };
 
     public static string DefaultBinding = "Right";
