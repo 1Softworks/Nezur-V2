@@ -46,11 +46,12 @@ public partial class MainInterface : Window
          secret: "da0fa5c2ed5edc166033d7296f3343118d8401fd552aafae3b231d896b558dd9",
          version: "1.0"
      );
+
     public MainInterface()
     {
         InitializeComponent();
         mouseMovement = new MouseMovement();
-        Username.Text = $"Hello\n{Environment.UserName}";
+        Username.Text = $"Hello,\n{Environment.UserName}";
         SetThemeColors();
         fovOverlay = new FovOverlay();
         fovOverlay.Hide();
@@ -401,8 +402,9 @@ public partial class MainInterface : Window
 
         AIModel = new ObjectDetection(modelPath);
         MiscSettings["ModelLoaded"] = true;
-        ModelStatusText.Text = "Online";
+        ModelStatusText.Text = " Online";
         ModelStatusText.Foreground = new SolidColorBrush(Colors.Green);
+
     }
 
     public static void InitializeAutoClickTimer()

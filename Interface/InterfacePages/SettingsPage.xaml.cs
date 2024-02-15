@@ -332,6 +332,7 @@ public partial class SettingsPage : Page
             SetWindowPos(mainWindowHandle, new IntPtr(-2), 0, 0, 0, 0, TOPMOST_FLAGS);
         }
     }
+
     //private SpeechRecognizer speechRecognizer;
 
     //private void EnableVC_Click(object sender, RoutedEventArgs e)

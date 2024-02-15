@@ -84,11 +84,18 @@
             set => SetProperty("TopMost", value);
         }
 
+        public static bool RGB
+        {
+            get => GetProperty<bool>("RGB", false);
+            set => SetProperty("RGB", value);
+        }
+
         public static bool VC
         {
             get => GetProperty<bool>("VC", false);
             set => SetProperty("VC", value);
         }
+
         //public static bool DevMode
         //{
         //    get => GetProperty<bool>("DevMode", false);

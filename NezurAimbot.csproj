@@ -55,7 +55,6 @@
     <None Remove="Assets\Fonts\Poppins-Thin.ttf" />
     <None Remove="Assets\Fonts\Poppins-ThinItalic.ttf" />
     <None Remove="Assets\Fonts\Segoe Fluent Icons.ttf" />
-    <None Remove="Interface\Loader\SettingsBackground.png" />
     <None Remove="NewFile1.txt" />
     <None Remove="Static\NewFile1.txt" />
   </ItemGroup>
@@ -113,7 +112,6 @@
     <Resource Include="Assets\Fonts\Poppins-Thin.ttf" />
     <Resource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
     <Resource Include="Assets\Fonts\Segoe Fluent Icons.ttf" />
-    <Resource Include="Interface\Loader\SettingsBackground.png" />
   </ItemGroup>
 
   <ItemGroup>

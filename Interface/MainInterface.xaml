@@ -115,15 +115,17 @@
                 Width="120"
                 Height="20"
                 Margin="230,0,0,5"
-               
-     
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontFamily="/Assets/Fonts/#Poppins Medium"
                 FontSize="14"
                 Foreground="DarkRed"
                 MouseLeftButtonDown="Drag"
-                Text="Offline" />
+                Text="Offline" >
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
             <Button
                 Name="Exit"
                 Width="25"
