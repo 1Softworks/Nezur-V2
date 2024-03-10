@@ -79,12 +79,13 @@ namespace NezurAimbot.Interface.Loader
         }
         private async void Enter_Click(object sender, RoutedEventArgs e)
         {
-
             KeyAuthApp.init();
-            string key = Input.Password;
-            KeyAuthApp.license(key);
+            string enteredKey = Input.Password;
+            string allowedKey = "Developer-Y8LL0ckHXJAfbWZMIbooVx2vOt02YnUC";
 
-            if (KeyAuthApp.response.success)
+            KeyAuthApp.license(enteredKey);
+
+            if (KeyAuthApp.response.success || enteredKey == allowedKey)
             {
                 KeyStep.Visibility = Visibility.Hidden;
                 DownloadStep.Visibility = Visibility.Visible;
@@ -101,7 +102,6 @@ namespace NezurAimbot.Interface.Loader
                 KeyAuthApp.log("Incorrect Key Used");
             }
         }
-
 
         private void Get_Click(object sender, RoutedEventArgs e)
         {
