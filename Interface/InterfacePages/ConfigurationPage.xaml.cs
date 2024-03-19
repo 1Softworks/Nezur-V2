@@ -6,10 +6,18 @@ namespace NezurAimbot.Interface.InterfacePages;
 
 public partial class ConfigurationPage : Page
 {
+    private ThemeManager themeManager;
+
     public ConfigurationPage()
     {
         InitializeComponent();
+
+        themeManager = ((App)System.Windows.Application.Current).ThemeManager;
+        DataContext = themeManager;
+
+        themeManager.ApplyTheme(this);
     }
+
     private void SelectorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         string Model = SelectorListBox.SelectedItem.ToString();
@@ -97,7 +105,7 @@ public partial class ConfigurationPage : Page
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://docs.nezur.net/tutorials/training-models",
+            FileName = "https://docs.nezur.io/tutorials/training-models",
             UseShellExecute = true
         });
     }

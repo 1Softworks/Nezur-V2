@@ -4,6 +4,8 @@ namespace NezurAimbot;
 
 public partial class App : Application
 {
+    public ThemeManager ThemeManager { get; } = new ThemeManager();
+
     protected override void OnStartup(StartupEventArgs e)
     {
         Current.DispatcherUnhandledException += (s, e) =>

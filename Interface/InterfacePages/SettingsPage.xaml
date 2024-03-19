@@ -45,7 +45,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <WrapPanel Orientation="Horizontal">
             <Grid x:Name="Discord"
                 Width="235" 
@@ -171,7 +171,7 @@
                     VerticalAlignment="Top">
                     <Border
                         Background="#FF282832"
-                        Opacity="0.25"/>
+                        Opacity="0.25" Height="30" VerticalAlignment="Bottom"/>
                     <TextBlock Text="Change Keybind"
                         Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
@@ -194,7 +194,7 @@
                     VerticalAlignment="Top">
                     <Border
                         Background="#FF282832"
-                        Opacity="0.25"/>
+                        Opacity="0.25" Height="30" VerticalAlignment="Bottom"/>
                     <TextBlock Text="Reset All Settings"
                         Foreground="#dde6e8"
                         FontFamily="/Assets/Fonts/#Poppins Regualr"
@@ -475,6 +475,69 @@
                         Margin="0,0,10,0"
                         CornerRadius="2"
                         Background="White"/>
+                </Grid>
+                <Grid Height="30"
+                    Margin="0,120,0,0"
+                    VerticalAlignment="Top">
+                    <Border
+                        Background="#FF282832"
+                        Opacity="0.25"/>
+                    <TextBlock Text="Background"
+                        Foreground="#dde6e8"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        VerticalAlignment="Center"
+                        Margin="10,0,0,0"/>
+                    <Button x:Name="ChangeBackground"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        Foreground="#dde6e8" 
+                        Background="#FF282832" BorderThickness="0" VerticalAlignment="Center"
+                        Margin="164,0,5,0"
+                        FontSize="12"
+                        Content="Change"
+                        Style="{StaticResource AnimatedButtonStyle}"
+                        Height="20" Click="ChangeBackground_Click"/>
+                </Grid>
+                <Grid Height="30"
+                    Margin="0,160,0,0"
+                    VerticalAlignment="Top">
+                    <Border
+                        Background="#FF282832"
+                        Opacity="0.25"/>
+                    <TextBlock Text="Text Color"
+                        Foreground="#dde6e8"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        VerticalAlignment="Center"
+                        Margin="10,0,0,0"/>
+                    <Button x:Name="ChangeText"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        Foreground="#dde6e8" 
+                        Background="#FF282832" BorderThickness="0" VerticalAlignment="Center"
+                        Margin="164,0,5,0"
+                        FontSize="12"
+                        Content="Change"
+                        Style="{StaticResource AnimatedButtonStyle}"
+                        Height="20" Click="ChangeText_Click"/>
+                </Grid>
+                <Grid Height="30"
+                    Margin="0,200,0,0"
+                    VerticalAlignment="Top">
+                    <Border
+                        Background="#FF282832"
+                        Opacity="0.25"/>
+                    <TextBlock Text="Export/Import"
+                        Foreground="#dde6e8"
+                        FontFamily="/Assets/Fonts/#Poppins Regualr"
+                        VerticalAlignment="Center"
+                        Margin="10,0,0,0"/>
+                    <Button x:Name="ExportImport"
+                        FontFamily="/Assets/Fonts/#Poppins Regular"
+                        Foreground="#dde6e8" 
+                        Background="#FF282832" BorderThickness="0" VerticalAlignment="Center"
+                        Margin="164,0,5,0"
+                        FontSize="12"
+                        Content="Start"
+                        Style="{StaticResource AnimatedButtonStyle}"
+                        Height="20" Click="ExportImport_Click"/>
                 </Grid>
             </Grid>
             <Grid x:Name="Config"

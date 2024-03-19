@@ -12,12 +12,13 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Windows.Themes;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 
 namespace NezurAimbot.Interface;
 
 public partial class MainInterface : Window
-
 {
     private bool AnimationActive = false;
     private int ActivePage;
@@ -47,9 +48,16 @@ public partial class MainInterface : Window
          version: "1.0"
      );
 
+    private ThemeManager themeManager;
+
     public MainInterface()
     {
         InitializeComponent();
+
+        themeManager = ((App)Application.Current).ThemeManager;
+        themeManager.PropertyChanged += ThemeManager_PropertyChanged;
+        ApplyTheme();
+
         mouseMovement = new MouseMovement();
         Username.Text = $"Hello,\n{Environment.UserName}";
         SetThemeColors();
@@ -62,6 +70,86 @@ public partial class MainInterface : Window
         InitializeRPC();
         KeyAuthApp.init();
         KeyAuthApp.check();
+    }
+
+    public enum ThemeProperty
+    {
+        TextColor
+    }
+
+    private void ThemeManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(ThemeManager.BackgroundImage):
+                Background.Background = themeManager.BackgroundImage;
+                break;
+
+            case nameof(ThemeManager.Background):
+                if (themeManager.BackgroundImage == null)
+                {
+                    Background.Background = themeManager.Background;
+                }
+                break;
+
+            case nameof(ThemeManager.TextColor):
+                ApplyThemeVT(this, ThemeProperty.TextColor);
+                break;
+        }
+    }
+
+    private void ApplyTheme()
+    {
+        if (themeManager.BackgroundImage != null)
+        {
+            Background.Background = themeManager.BackgroundImage;
+        }
+        else
+        {
+            Background.Background = themeManager.Background;
+        }
+
+        ApplyThemeVT(this, ThemeProperty.TextColor);
+    }
+
+    private void ApplyThemeVT(Visual element, ThemeProperty property)
+    {
+        if (element == null)
+            return;
+
+        switch (property)
+        {
+            case ThemeProperty.TextColor:
+                if (element is TextBlock textBlock)
+                {
+                    if (!IsInPage(textBlock))
+                    {
+                        textBlock.Foreground = themeManager.TextColor;
+                    }
+                }
+                break;
+        }
+
+        int childrenCount = VisualTreeHelper.GetChildrenCount(element);
+        for (int i = 0; i < childrenCount; i++)
+        {
+            Visual child = VisualTreeHelper.GetChild(element, i) as Visual;
+            ApplyThemeVT(child, property);
+        }
+    }
+
+    private bool IsInPage(TextBlock textBlock)
+    {
+        DependencyObject parent = VisualTreeHelper.GetParent(textBlock);
+        while (parent != null)
+        {
+            if (parent is Page)
+            {
+                return true;
+            }
+            parent = VisualTreeHelper.GetParent(parent);
+        }
+        return false;
     }
 
     private void ThemeTimer_Tick(object sender, EventArgs e)
@@ -77,7 +165,6 @@ public partial class MainInterface : Window
         NezurTitle.Foreground = themeBrush;
     }
 
-
     private async void Main_Loaded(object sender, RoutedEventArgs e)
     {
         WindowHandle = new WindowInteropHelper(this).Handle;
@@ -85,8 +172,8 @@ public partial class MainInterface : Window
     }
 
     // Download Links
-    // https://nezur.net/Spoofer.zip
-    // https://nezur.net/NezurMouseFix.zip
+    // https://nezur.io/Spoofer.zip
+    // https://nezur.io/NezurMouseFix.zip
     // https://github.com/skibbbitoiltisskibbbitoiltisskibbbitoi/Models/releases/download/NezurColorAimbot/NezurColorAimbot.zip
     // https://github.com/0x9374698765254342/Models
 
@@ -101,6 +188,11 @@ public partial class MainInterface : Window
         predictionManager = new ModelPrediction();
         predictionManager.InitializeKalmanFilter();
         StartDetection();
+    }
+
+    private void RecoilControl()
+    {
+
     }
 
     public static void ShowFOV()
@@ -122,8 +214,6 @@ public partial class MainInterface : Window
         bindingManager.OnBindingPressed += (binding) => { GlobalSettings.IsHoldingBinding = true; };
         bindingManager.OnBindingReleased += (binding) => { GlobalSettings.IsHoldingBinding = false; };
     }
-
-
 
     public static void ResetBinding() => bindingManager.SetupDefault(Properties.Settings.Default.Current_Binding);
 
@@ -329,11 +419,11 @@ public partial class MainInterface : Window
             {
                 predictionManager.UpdateKalmanFilter(detectedX, detectedY);
                 var predictedPosition = predictionManager.GetEstimatedPosition();
-                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, true);
+                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, true, 0);
             }
             else
             {
-                mouseMovement.MoveViewTo(detectedX, detectedY, true);
+                mouseMovement.MoveViewTo(detectedX, detectedY, true, 0);
             }
         }
         else
@@ -342,11 +432,11 @@ public partial class MainInterface : Window
             {
                 predictionManager.UpdateKalmanFilter(detectedX, detectedY);
                 var predictedPosition = predictionManager.GetEstimatedPosition();
-                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, false);
+                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, false, 0);
             }
             else
             {
-                mouseMovement.MoveViewTo(detectedX, detectedY, false);
+                mouseMovement.MoveViewTo(detectedX, detectedY, false, 0);
             }
         }
     }
@@ -435,13 +525,13 @@ public partial class MainInterface : Window
             State = "Roblox's #1 External",
             Timestamps = Timestamps.Now,
             Buttons = new DiscordRPC.Button[] {
-                new() { Label = "Download (NEZUR.NET)", Url = "https://nezur.net", },
+                new() { Label = "Download (NEZUR.IO)", Url = "https://nezur.IO", },
                 new() { Label = "Join the Discord", Url = "https://discord.gg/nezurai", },
             },
             Assets = new Assets
             {
                 LargeImageKey = "nezur",
-                LargeImageText = "NEZUR.NET",
+                LargeImageText = "NEZUR.IO",
             },
         });
     }

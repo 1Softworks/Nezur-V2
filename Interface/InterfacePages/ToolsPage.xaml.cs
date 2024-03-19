@@ -7,16 +7,26 @@ using System.Net;
 using System.Net.Http;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace NezurAimbot.Interface.InterfacePages;
 
 public partial class ToolsPage : Page
 {
+    private ThemeManager themeManager;
+
     public ToolsPage()
     {
         InitializeComponent();
+
+        themeManager = ((App)System.Windows.Application.Current).ThemeManager;
+        DataContext = themeManager;
+
+        themeManager.ApplyTheme(this);
+
         LoadAllActiveSettings();
     }
+
     private void LoadAllActiveSettings()
     {
         // Load AimAssist Enabled
@@ -62,6 +72,28 @@ public partial class ToolsPage : Page
         SpoofOffset.Color = themeColor;
         ColorAimbotOffset.Color = themeColor;
      
+    }
+
+    private void Categories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        TabItem selectedTab = e.AddedItems.OfType<TabItem>().FirstOrDefault();
+        if (selectedTab != null)
+        {
+            FrameworkElement content = selectedTab.Content as FrameworkElement;
+            if (content != null)
+            {
+                content.Opacity = 0;
+
+                DoubleAnimation fadeInAnimation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromSeconds(0.5)
+                };
+
+                content.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
+            }
+        }
     }
 
     private static void LoadSliderSetting(double value, TextBlock textBlock, Slider slider)
@@ -282,7 +314,7 @@ public partial class ToolsPage : Page
     {
         /*try
         {
-            string fileUrl = "https://nezur.net/RobloxClient.zip";
+            string fileUrl = "https://nezur.io/RobloxClient.zip";
             string localFilePath = LocalModels[3];
             string extractionPath = LocalDirectorys[0];
 

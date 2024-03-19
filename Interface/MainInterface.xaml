@@ -60,10 +60,11 @@
         </Style>
     </Window.Resources>
     <Grid UseLayoutRounding="False">
-
+        <Border x:Name="Mask" Background="Black" CornerRadius="2.5"/>
         <!--  Interface Background  -->
         <Border
             x:Name="Background"
+            x:FieldModifier="public"
             Background="#FF0A0A0F"
             BorderBrush="#FF282832"
             BorderThickness="2"
@@ -74,7 +75,7 @@
             <Border
                 x:Name="EditorBackground"
                 Margin="120,50,0,0"
-                Background="#FF0A0A0F"
+                Background="Transparent"
                 BorderBrush="#FF282832"
                 BorderThickness="1.5"
                 CornerRadius="2.5,0,0,0" />
@@ -296,6 +297,7 @@
             </Grid>
             <Border
                 x:Name="Profile"
+                Opacity="0.6"
                 Width="102"
                 Height="53"
                 Margin="9,0,0,10"
@@ -314,7 +316,8 @@
                     FontFamily="/Assets/Fonts/#Poppins Medium"
                     FontSize="14"
                     Foreground="#FF414150"
-                    TextAlignment="Center"><Run
+                    TextAlignment="Center">
+                    <Run
                         FontFamily="/Assets/Fonts/#Poppins Medium"
                         Foreground="#FF414150"
                         Text="{Binding CurrentUserName, FallbackValue=username}" /></TextBlock>

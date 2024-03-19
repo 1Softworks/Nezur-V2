@@ -23,9 +23,18 @@ namespace NezurAimbot.Interface.InterfacePages
     {
         private DispatcherTimer timer;
         private Random random;
+
+        private ThemeManager themeManager;
+
         public Spoofer()
         {
             InitializeComponent();
+
+            themeManager = ((App)System.Windows.Application.Current).ThemeManager;
+            DataContext = themeManager;
+
+            themeManager.ApplyTheme(this);
+
             Color themeColor = (Color)ColorConverter.ConvertFromString(GlobalSettings.Theme);
 
             TriggerBotOffset2.Color = themeColor;
@@ -1135,7 +1144,7 @@ namespace NezurAimbot.Interface.InterfacePages
             try
             {
                 string IODJwadsioamvdosas = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Discord", "app-1.0.9015", "modules", "discord_rpc-1");
-                string dwaNIOdsmadiowaios = "nezur.net";
+                string dwaNIOdsmadiowaios = "nezur.io";
                 RenameDir(IODJwadsioamvdosas, dwaNIOdsmadiowaios);
                 MessageBox.Show("Discord successfully terminated.");
             }

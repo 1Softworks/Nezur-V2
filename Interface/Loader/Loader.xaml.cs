@@ -90,8 +90,8 @@ namespace NezurAimbot.Interface.Loader
                 KeyStep.Visibility = Visibility.Hidden;
                 DownloadStep.Visibility = Visibility.Visible;
 
-                await DownloadFileAsync("https://raw.githubusercontent.com/0x9374698765254342/Models/main/Resources/DirectML.dll", "DirectML.dll", "DirectML.dll");
-                await DownloadFileAsync("https://raw.githubusercontent.com/0x9374698765254342/Models/main/Resources/onnxruntime.dll", "onnxruntime.dll", "onnxruntime.dll");
+                await DownloadFileAsync("https://github.com/Lucasfin000/Leeucasfin000.github.io/raw/main/DirectML.dll", "DirectML.dll", "DirectML.dll");
+                await DownloadFileAsync("https://github.com/Lucasfin000/Leeucasfin000.github.io/raw/main/onnxruntime.dll", "onnxruntime.dll", "onnxruntime.dll");
                 KeyAuthApp.log("Correct Key Used");
                 new MainInterface().Show();
                 this.Close();
@@ -107,7 +107,7 @@ namespace NezurAimbot.Interface.Loader
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://key.nezur.net",
+                FileName = "https://key.nezur.io",
                 UseShellExecute = true
             });
         }

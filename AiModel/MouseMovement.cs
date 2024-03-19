@@ -13,7 +13,7 @@ namespace NezurAimbot
         [DllImport("user32.dll")]
         private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
-        public void MoveViewTo(int detectedX, int detectedY, bool triggerBot)
+        public void MoveViewTo(int detectedX, int detectedY, bool triggerBot, int yOffset)
         {
             var screenBounds = Screen.PrimaryScreen.Bounds;
             var halfScreenWidth = screenBounds.Width / 2;
@@ -21,6 +21,8 @@ namespace NezurAimbot
 
             int targetX = detectedX - halfScreenWidth;
             int targetY = detectedY - halfScreenHeight;
+
+            targetY += yOffset;
 
             double arC = (double)screenBounds.Width / screenBounds.Height;
             targetY = (int)(targetY * arC);

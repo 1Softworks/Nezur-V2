@@ -7,12 +7,14 @@ using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.CognitiveServices.Speech;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
+using WpfAnimatedGif;
 
 namespace NezurAimbot.Interface.InterfacePages;
 
 public partial class SettingsPage : Page
 {
-
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
@@ -20,9 +22,17 @@ public partial class SettingsPage : Page
     private const uint SWP_NOSIZE = 0x0001;
     private const uint TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
+    private ThemeManager themeManager;
+
     public SettingsPage()
     {
         InitializeComponent();
+
+        themeManager = ((App)System.Windows.Application.Current).ThemeManager;
+        DataContext = themeManager;
+
+        themeManager.ApplyTheme(this);
+
         LoadActiveSettings();
     }
 
@@ -72,7 +82,7 @@ public partial class SettingsPage : Page
 
     private async void InputButton_Click(object sender, RoutedEventArgs e)
     {
-        InputButton.Content = "Listening..";
+        InputButton.Content = "Listening...";
 
         string binding = await MainInterface.GetNewInputBindingAsync();
 
@@ -271,7 +281,7 @@ public partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"An error occurred while trying to kill the process: {ex.Message}");
+            System.Windows.MessageBox.Show($"An error occurred while trying to kill the process: {ex.Message}");
         }
     }
     public string RobloxVersion
@@ -307,11 +317,11 @@ public partial class SettingsPage : Page
                 File.WriteAllText(filePath, jsonContent);
             }
 
-            MessageBox.Show("Please rejoin roblox.");
+            System.Windows.MessageBox.Show("Please rejoin roblox.");
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"An error occurred: {ex.Message}");
+            System.Windows.MessageBox.Show($"An error occurred: {ex.Message}");
         }
     }
 
@@ -331,6 +341,147 @@ public partial class SettingsPage : Page
             IntPtr mainWindowHandle = Process.GetCurrentProcess().MainWindowHandle;
             SetWindowPos(mainWindowHandle, new IntPtr(-2), 0, 0, 0, 0, TOPMOST_FLAGS);
         }
+    }
+
+    private void ChangeBackground_Click(object sender, RoutedEventArgs e)
+    {
+        var contextMenu = new ContextMenu();
+
+        contextMenu.Style = FindResource("DarkContext") as Style;
+
+        var solidColorMenuItem = new MenuItem { Header = "Solid Color" };
+        solidColorMenuItem.Click += (solidSender, solidArgs) => ChangeBackgroundColor(solid: true);
+        contextMenu.Items.Add(solidColorMenuItem);
+
+        var gradientMenuItem = new MenuItem { Header = "Gradient" };
+        gradientMenuItem.Click += (gradientSender, gradientArgs) => ChangeBackgroundColor(solid: false);
+        contextMenu.Items.Add(gradientMenuItem);
+
+        var imageMenuItem = new MenuItem { Header = "Image/GIF" };
+        imageMenuItem.Click += (imageSender, imageArgs) => ChangeBackgroundImage();
+        contextMenu.Items.Add(imageMenuItem);
+
+        contextMenu.PlacementTarget = sender as UIElement;
+        contextMenu.IsOpen = true;
+    }
+
+    private void ChangeBackgroundImage()
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|All files (*.*)|*.*";
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            string imagePath = openFileDialog.FileName;
+
+            Image image = new Image();
+            image.Stretch = Stretch.Fill;
+            image.Opacity = 0.4;
+
+            ImageBehavior.SetAnimatedSource(image, new BitmapImage(new Uri(imagePath)));
+            themeManager.BackgroundImage = new VisualBrush(image);
+        }
+    }
+
+    private void ChangeBackgroundColor(bool solid)
+    {
+        ColorDialog colorDialog = new ColorDialog();
+        if (colorDialog.ShowDialog() == DialogResult.OK)
+        {
+            Color selectedColor = System.Windows.Media.Color.FromArgb(colorDialog.Color.A, colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
+            SolidColorBrush newBackgroundColor = new SolidColorBrush(selectedColor);
+
+            if (solid)
+            {
+                themeManager.BackgroundImage = null;
+                themeManager.Background = newBackgroundColor;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Please choose a second color for the gradient.");
+
+                ColorDialog secondColorDialog = new ColorDialog();
+                if (secondColorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Color secondSelectedColor = System.Windows.Media.Color.FromArgb(secondColorDialog.Color.A, secondColorDialog.Color.R, secondColorDialog.Color.G, secondColorDialog.Color.B);
+                    LinearGradientBrush gradientBrush = new LinearGradientBrush();
+                    gradientBrush.GradientStops.Add(new GradientStop(selectedColor, 0));
+                    gradientBrush.GradientStops.Add(new GradientStop(secondSelectedColor, 1));
+
+                    themeManager.BackgroundImage = null;
+                    themeManager.Background = gradientBrush;
+                }
+            }
+        }
+    }
+
+    private void ChangeText_Click(object sender, RoutedEventArgs e)
+    {
+        var colorDialog = new ColorDialog();
+        if (colorDialog.ShowDialog() == DialogResult.OK)
+        {
+            Color selectedColor = System.Windows.Media.Color.FromArgb(colorDialog.Color.A, colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
+            SolidColorBrush newColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb(selectedColor.A, selectedColor.R, selectedColor.G, selectedColor.B));
+
+            themeManager.TextColor = newColor;
+        }
+    }
+
+    public enum ThemeAction
+    {
+        Export,
+        Import
+    }
+
+    public void ThemeAct(ThemeAction action)
+    {
+        string filePath = "";
+
+        switch (action)
+        {
+            case ThemeAction.Export:
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = saveFileDialog.FileName;
+                    themeManager.ExportTheme(filePath);
+                    System.Windows.MessageBox.Show("Theme exported successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                break;
+
+            case ThemeAction.Import:
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+                    themeManager.ImportTheme(filePath);
+                    System.Windows.MessageBox.Show("Theme imported successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                break;
+
+            default:
+                System.Windows.MessageBox.Show("Invalid action specified.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                break;
+        }
+    }
+
+    private void ExportImport_Click(object sender, RoutedEventArgs e)
+    {
+        var contextMenu = new ContextMenu();
+
+        contextMenu.Style = FindResource("DarkContext") as Style;
+
+        var Export = new MenuItem { Header = "Export" };
+        Export.Click += (solidSender, solidArgs) => ThemeAct(ThemeAction.Export);
+        contextMenu.Items.Add(Export);
+
+        var Import = new MenuItem { Header = "Import" };
+        Import.Click += (gradientSender, gradientArgs) => ThemeAct(ThemeAction.Import);
+        contextMenu.Items.Add(Import);
+
+        contextMenu.PlacementTarget = sender as UIElement;
+        contextMenu.IsOpen = true;
     }
 
     //private SpeechRecognizer speechRecognizer;
