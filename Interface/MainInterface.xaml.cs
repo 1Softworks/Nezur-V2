@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.IO.Compression;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -8,13 +7,11 @@ using NezurAimbot.Interface.InterfacePages;
 using Application = System.Windows.Application;
 using DiscordRPC;
 using System.Windows.Forms;
-using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Windows.Interop;
-using Microsoft.Windows.Themes;
 using System.ComponentModel;
 using System.Windows.Controls;
-
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace NezurAimbot.Interface;
 
@@ -59,6 +56,7 @@ public partial class MainInterface : Window
         ApplyTheme();
 
         mouseMovement = new MouseMovement();
+
         Username.Text = $"Hello,\n{Environment.UserName}";
         SetThemeColors();
         fovOverlay = new FovOverlay();
@@ -190,11 +188,6 @@ public partial class MainInterface : Window
         StartDetection();
     }
 
-    private void RecoilControl()
-    {
-
-    }
-
     public static void ShowFOV()
     {
         MiscSettings["ShowFOV"] = true;
@@ -224,7 +217,7 @@ public partial class MainInterface : Window
         void onBindingSet(string binding)
         {
             taskCompletionSource.SetResult(binding);
-            bindingManager.OnBindingSet -= onBindingSet; // Unsubscribe after handling once
+            bindingManager.OnBindingSet -= onBindingSet;
         }
 
         bindingManager.StartListeningForBinding();
@@ -419,11 +412,11 @@ public partial class MainInterface : Window
             {
                 predictionManager.UpdateKalmanFilter(detectedX, detectedY);
                 var predictedPosition = predictionManager.GetEstimatedPosition();
-                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, true, 0);
+                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, true);
             }
             else
             {
-                mouseMovement.MoveViewTo(detectedX, detectedY, true, 0);
+                mouseMovement.MoveViewTo(detectedX, detectedY, true);
             }
         }
         else
@@ -432,11 +425,11 @@ public partial class MainInterface : Window
             {
                 predictionManager.UpdateKalmanFilter(detectedX, detectedY);
                 var predictedPosition = predictionManager.GetEstimatedPosition();
-                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, false, 0);
+                mouseMovement.MoveViewTo(predictedPosition.X, predictedPosition.Y, false);
             }
             else
             {
-                mouseMovement.MoveViewTo(detectedX, detectedY, false, 0);
+                mouseMovement.MoveViewTo(detectedX, detectedY, false);
             }
         }
     }

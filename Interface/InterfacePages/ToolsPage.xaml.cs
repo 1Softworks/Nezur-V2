@@ -1,5 +1,4 @@
-﻿
-using DiscordRPC;
+﻿using DiscordRPC;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -24,6 +23,8 @@ public partial class ToolsPage : Page
 
         themeManager.ApplyTheme(this);
 
+        GlobalSettings.PropertyChanged += HandlePropertyChanged;
+
         LoadAllActiveSettings();
     }
 
@@ -44,6 +45,7 @@ public partial class ToolsPage : Page
 
         EnableAutoClickCheck.IsChecked = MiscSettings["AutoClicker"];
 
+        AntiRecoilCheck.IsChecked = GlobalSettings.AntiRecoil;
 
 
         // Load AIConfidence Values
@@ -63,15 +65,39 @@ public partial class ToolsPage : Page
 
         LoadSliderSetting(Properties.Settings.Default.AutoClickerDelay, AutoClickerDelayValue1, AutoClickerDelaySlider);
 
+        LoadSliderSetting(GlobalSettings.Recoil_Offset, RecoilControlValue, RecoilControlSlider);
+
+        LoadSliderSetting(GlobalSettings.Recoil_OffsetX, RecoilControlXValue, RecoilControlXSlider);
+
+        LoadSliderSetting(GlobalSettings.Recoil_Rate, HoldTimeValue, HoldTimeSlider);
+
+        LoadSliderSetting(GlobalSettings.Recoil_FireRate, FireRateValue, FireRateSlider);
+
         Color themeColor = (Color)ColorConverter.ConvertFromString(GlobalSettings.Theme);
         ModelOffset.Color = themeColor;
         AimAssistColorOffset.Color = themeColor;
         TriggerBotOffset.Color = themeColor;
         AutoClickerOffset.Color = themeColor;
-        AutoClickerOffset1.Color = themeColor;
+        ExternalOffset.Color = themeColor;
         SpoofOffset.Color = themeColor;
         ColorAimbotOffset.Color = themeColor;
-     
+        AntiRecoilOffset.Color = themeColor;
+    }
+
+    private void HandlePropertyChanged(string propertyName)
+    {
+        switch (propertyName)
+        {
+            case "AntiRecoil":
+                if (!GlobalSettings.AntiRecoil)
+                {
+                    AntiRecoilCheck.IsChecked = false;
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void Categories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -653,6 +679,47 @@ public partial class ToolsPage : Page
 
         // Wait for the process to finish
         process.WaitForExit();
+    }
+
+    private void AntiRecoilCheck_Click(object sender, RoutedEventArgs e)
+    {
+        GlobalSettings.AntiRecoil = AntiRecoilCheck.IsChecked ?? false;
+    }
+
+    private void RecoilControlSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (!RecoilControlSlider.IsInitialized) return;
+
+        int V = (int)RecoilControlSlider.Value;
+        RecoilControlValue.Text = V.ToString();
+        GlobalSettings.Recoil_Offset = V;
+    }
+
+    private void RecoilControlXSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (!RecoilControlXSlider.IsInitialized) return;
+
+        int V = (int)RecoilControlXSlider.Value;
+        RecoilControlXValue.Text = V.ToString();
+        GlobalSettings.Recoil_OffsetX = V;
+    }
+
+    private void HoldTimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (!HoldTimeSlider.IsInitialized) return;
+
+        int V = (int)HoldTimeSlider.Value;
+        HoldTimeValue.Text = V.ToString();
+        GlobalSettings.Recoil_Rate = V;
+    }
+
+    private void FireRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (!FireRateSlider.IsInitialized) return;
+
+        int V = (int)FireRateSlider.Value;
+        FireRateValue.Text = V.ToString();
+        GlobalSettings.Recoil_FireRate = V;
     }
 }
 

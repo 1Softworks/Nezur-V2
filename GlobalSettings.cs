@@ -3,7 +3,6 @@
     public static class GlobalSettings
     {
         private static Dictionary<string, object> properties = new Dictionary<string, object>();
-
         public static bool IsHoldingBinding = false;
 
         public static float ConfidenceThreshold
@@ -108,6 +107,36 @@
             set => SetProperty("Theme", value);
         }
 
+        public static bool AntiRecoil
+        {
+            get => GetProperty<bool>("AntiRecoil", false);
+            set => SetProperty("AntiRecoil", value);
+        }
+
+        public static int Recoil_Offset
+        {
+            get => GetProperty<int>("Recoil_Offset", 0);
+            set => SetProperty("Recoil_Offset", value);
+        }
+
+        public static int Recoil_OffsetX
+        {
+            get => GetProperty<int>("Recoil_OffsetX", 0);
+            set => SetProperty("Recoil_OffsetX", value);
+        }
+
+        public static int Recoil_Rate
+        {
+            get => GetProperty<int>("Recoil_Rate", 0);
+            set => SetProperty("Recoil_Rate", value);
+        }
+
+        public static int Recoil_FireRate
+        {
+            get => GetProperty<int>("Recoil_FireRate", 0);
+            set => SetProperty("Recoil_FireRate", value);
+        }
+
         private static T GetProperty<T>(string propertyName, T defaultValue)
         {
             if (properties.ContainsKey(propertyName) && properties[propertyName] is T)
@@ -136,10 +165,12 @@
         }
 
         public static event Action<string> PropertyChanged;
+        public static event Action<string> ExitRecoil;
 
         private static void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(propertyName);
+            ExitRecoil?.Invoke(propertyName);
         }
     }
 }

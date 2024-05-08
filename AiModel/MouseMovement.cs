@@ -1,4 +1,5 @@
 ﻿using NezurAimbot.AiModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -13,7 +14,7 @@ namespace NezurAimbot
         [DllImport("user32.dll")]
         private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
-        public void MoveViewTo(int detectedX, int detectedY, bool triggerBot, int yOffset)
+        public void MoveViewTo(int detectedX, int detectedY, bool triggerBot)
         {
             var screenBounds = Screen.PrimaryScreen.Bounds;
             var halfScreenWidth = screenBounds.Width / 2;
@@ -21,8 +22,6 @@ namespace NezurAimbot
 
             int targetX = detectedX - halfScreenWidth;
             int targetY = detectedY - halfScreenHeight;
-
-            targetY += yOffset;
 
             double arC = (double)screenBounds.Width / screenBounds.Height;
             targetY = (int)(targetY * arC);
@@ -50,6 +49,25 @@ namespace NezurAimbot
 
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+        }
+
+        private static int LastARCT = 0;
+
+        public static void OffsetMouse()
+        {
+            int timeSinceLastClick = Math.Abs(DateTime.UtcNow.Millisecond - LastARCT);
+
+            if (timeSinceLastClick < GlobalSettings.Recoil_FireRate)
+            {
+                return;
+            }
+
+            int xRecoil = GlobalSettings.Recoil_OffsetX;
+            int yRecoil = GlobalSettings.Recoil_Offset;
+
+            mouse_event(MOUSEEVENTF_MOVE, xRecoil, yRecoil, 0, 0);
+
+            LastARCT = DateTime.UtcNow.Millisecond;
         }
 
         private static System.Drawing.Point CubicBezier(System.Drawing.Point start, System.Drawing.Point end, System.Drawing.Point c1, System.Drawing.Point c2, double t)

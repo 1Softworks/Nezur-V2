@@ -1,4 +1,8 @@
 ﻿using Gma.System.MouseKeyHook;
+using NezurAimbot;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 public class InputBindingManager : IDisposable
@@ -11,6 +15,8 @@ public class InputBindingManager : IDisposable
     public event Action<string> OnBindingSet;
     public event Action<string> OnBindingPressed;
     public event Action<string> OnBindingReleased;
+
+    public AntiRecoilManager arManager = new();
 
     public void SetupDefault(string KeyCode)
     {
@@ -36,12 +42,32 @@ public class InputBindingManager : IDisposable
 
     private void GlobalHookKeyDown(object sender, KeyEventArgs e)
     {
-        HandleInputEvent(e.KeyCode.ToString());
+        if (e.KeyCode == Keys.OemCloseBrackets && GlobalSettings.AntiRecoil)
+        {
+            GlobalSettings.AntiRecoil = false;
+            System.Windows.MessageBox.Show("Anti-Recoil was disabled using keybind.");
+        }
+        else
+        {
+            HandleInputEvent(e.KeyCode.ToString());
+        }
     }
 
     private void GlobalHookMouseDown(object sender, MouseEventArgs e)
     {
-        HandleInputEvent(e.Button.ToString());
+        if (e.Button == MouseButtons.Left)
+        {
+            if (GlobalSettings.AntiRecoil)
+            {
+                arManager.MousePress = 0;
+                _ = arManager.StartAntiRecoil();
+            }
+            HandleInputEvent("LeftMouse");
+        }
+        else
+        {
+            HandleInputEvent(e.Button.ToString());
+        }
     }
 
     private void HandleInputEvent(string input)
@@ -52,7 +78,7 @@ public class InputBindingManager : IDisposable
             OnBindingSet?.Invoke(CurrentBinding);
             isSettingBinding = false;
         }
-        else if (CurrentBinding == input)
+        else if (CurrentBinding == input || (CurrentBinding == "LeftMouse" && input == "Left"))
         {
             OnBindingPressed?.Invoke(CurrentBinding);
         }
@@ -68,9 +94,24 @@ public class InputBindingManager : IDisposable
 
     private void GlobalHookMouseUp(object sender, MouseEventArgs e)
     {
-        if (CurrentBinding == e.Button.ToString())
+        if (e.Button == MouseButtons.Left)
         {
-            OnBindingReleased?.Invoke(CurrentBinding);
+            if (CurrentBinding != "LeftMouse")
+            {
+                if (GlobalSettings.AntiRecoil)
+                {
+                    arManager.StopAntiRecoil();
+                    arManager.MousePress = 0;
+                }
+                OnBindingReleased?.Invoke(CurrentBinding);
+            }
+        }
+        else
+        {
+            if (CurrentBinding == e.Button.ToString())
+            {
+                OnBindingReleased?.Invoke(CurrentBinding);
+            }
         }
     }
 

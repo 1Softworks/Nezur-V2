@@ -423,6 +423,202 @@
                 ValueChanged="Slider_ValueChanged" />
                         </Grid>
                     </Grid>
+                    <Grid
+            x:Name="TriggerBot_Copy"
+            Width="235"
+            Height="335"
+            Margin="15,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+                        <Border
+                Width="235"
+                Height="335"
+                Background="Transparent"
+                BorderBrush="#FF282832"
+                BorderThickness="1.5"
+                CornerRadius="2.5">
+                            <Label
+                    x:Name="RecoilBar"
+                    Height="30"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Anti-Recoil"
+                    FontFamily="/Assets/Fonts/#Poppins Medium"
+                    FontSize="13"
+                    Foreground="#dde6e8">
+                                <Label.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0" Color="#FF282832" />
+                                        <GradientStop x:Name="AntiRecoilOffset" Offset="0.5" Color="#dde6e8" />
+                                        <GradientStop Offset="1" Color="#FF282832" />
+                                    </LinearGradientBrush>
+                                </Label.BorderBrush>
+                                <Label.Background>
+                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                        <GradientStop Offset="-.25" Color="#FF282832" />
+                                        <GradientStop Offset=".75" Color="#FF0A0A0F" />
+                                    </LinearGradientBrush>
+                                </Label.Background>
+                                <Label.BorderThickness>
+                                    <Thickness
+                            Bottom="1.5"
+                            Left="0"
+                            Right="0"
+                            Top="0" />
+                                </Label.BorderThickness>
+                            </Label>
+                        </Border>
+                        <Grid
+                Height="30"
+                Margin="0,40,0,0"
+                VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    Foreground="#dde6e8"
+                    Text="Enable Anti-Recoil " />
+                            <CheckBox
+                    x:Name="AntiRecoilCheck"
+                    Margin="0,0,5,0"
+                    HorizontalAlignment="Right" Click="AntiRecoilCheck_Click"
+                     />
+                        </Grid>
+                        <Grid
+                Height="45"
+                Margin="0,245,0,0"
+                VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                    Margin="10,5,0,0"
+                    VerticalAlignment="Top"
+                    FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    Foreground="#dde6e8"
+                    Text="Fire Rate (ms)" />
+                            <TextBlock
+                    x:Name="FireRateValue"
+                    Margin="0,5,10,0"
+                    VerticalAlignment="Top"
+                    FontFamily="/Assets/Fonts/#Poppins Regualr"
+                    Foreground="#dde6e8"
+                    TextAlignment="Right" />
+                            <Slider
+                    x:Name="FireRateSlider"
+                    Margin="10,20,10,0"
+                    VerticalAlignment="Center"
+                    IsSnapToTickEnabled="True"
+                    Maximum="5000"
+                    Minimum="1"
+                    Style="{StaticResource Horizontal_Slider}"
+                    TickFrequency="1" ValueChanged="FireRateSlider_ValueChanged"/>
+                        </Grid>
+                        <Grid
+                            Height="45"
+                            Margin="0,190,0,0"
+                            VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                                Margin="10,5,0,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                Text="Hold Time (ms)" />
+                            <TextBlock
+                                x:Name="HoldTimeValue"
+                                Margin="0,5,10,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                TextAlignment="Right" />
+                            <Slider
+                                x:Name="HoldTimeSlider"
+                                Margin="10,20,10,0"
+                                VerticalAlignment="Center"
+                                IsSnapToTickEnabled="True"
+                                Maximum="1000"
+                                Minimum="1"
+                                Style="{StaticResource Horizontal_Slider}"
+                                TickFrequency="1" ValueChanged="HoldTimeSlider_ValueChanged"/>
+                        </Grid>
+                        <Grid
+                            Height="45"
+                            Margin="0,80,0,0"
+                            VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                                Margin="10,5,0,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                Text="Anti-Recoil Offset (Y)" />
+                            <TextBlock
+                                x:Name="RecoilControlValue"
+                                Margin="0,5,10,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                TextAlignment="Right" />
+                            <Slider
+                                x:Name="RecoilControlSlider"
+                                Margin="10,20,10,0"
+                                VerticalAlignment="Center"
+                                IsSnapToTickEnabled="True"
+                                Maximum="250"
+                                Minimum="-250"
+                                Style="{StaticResource Horizontal_Slider}"
+                                TickFrequency="1" ValueChanged="RecoilControlSlider_ValueChanged"/>
+                        </Grid>
+                        <Grid
+                            Height="45"
+                            Margin="0,135,0,0"
+                            VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                                Margin="10,5,0,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                Text="Anti-Recoil Offset (X)" />
+                            <TextBlock
+                                x:Name="RecoilControlXValue"
+                                Margin="0,5,10,0"
+                                VerticalAlignment="Top"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                TextAlignment="Right" />
+                            <Slider
+                                x:Name="RecoilControlXSlider"
+                                Margin="10,20,10,0"
+                                VerticalAlignment="Center"
+                                IsSnapToTickEnabled="True"
+                                Maximum="250"
+                                Minimum="-250"
+                                Style="{StaticResource Horizontal_Slider}"
+                                TickFrequency="1" ValueChanged="RecoilControlXSlider_ValueChanged"/>
+                        </Grid>
+                        <Grid
+                            Height="30"
+                            Margin="0,300,0,0"
+                            VerticalAlignment="Top">
+                            <Border Background="#FF282832" Opacity="0.25" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                Foreground="#dde6e8"
+                                Text="Disable Anti-Recoil Keybind" />
+                            <Border Width="27" Height="20" CornerRadius="4" Background="#FF232323" Margin="203,5,5,5">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontFamily="/Assets/Fonts/#Poppins Regualr"
+                                    Foreground="#FF84898A"
+                                    HorizontalAlignment="Center"
+                                    Text="]" />
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </WrapPanel>
             </TabItem>
 
@@ -443,7 +639,7 @@
         BorderThickness="1.5"
         CornerRadius="2.5">
                             <Label
-            x:Name="AutoClickerBar"
+            x:Name="ExternalBar"
             Height="30"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -455,7 +651,7 @@
                                 <Label.BorderBrush>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                         <GradientStop Offset="0" Color="#FF282832" />
-                                        <GradientStop x:Name="AutoClickerOffset" Offset="0.5" Color="#dde6e8" />
+                                        <GradientStop x:Name="ExternalOffset" Offset="0.5" Color="#dde6e8" />
                                         <GradientStop Offset="1" Color="#FF282832" />
                                     </LinearGradientBrush>
                                 </Label.BorderBrush>
@@ -1001,7 +1197,7 @@
                                 <Label.BorderBrush>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                         <GradientStop Offset="0" Color="#FF282832" />
-                                        <GradientStop x:Name="AutoClickerOffset1" Offset="0.5" Color="#dde6e8" />
+                                        <GradientStop x:Name="AutoClickerOffset" Offset="0.5" Color="#dde6e8" />
                                         <GradientStop Offset="1" Color="#FF282832" />
                                     </LinearGradientBrush>
                                 </Label.BorderBrush>
