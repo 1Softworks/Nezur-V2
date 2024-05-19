@@ -66,7 +66,7 @@ namespace NezurAimbot.Interface.Loader
         public static api KeyAuthApp = new api(
            name: "Nezur",
            ownerid: "2UWe8CI1m7",
-           secret: "da0fa5c2ed5edc166033d7296f3343118d8401fd552aafae3b231d896b558dd9",
+           secret: "c0d3d18df908612cc10805a2e4864663ad3d4ff9394667ee4204973585fa7da1",
            version: "1.0"
        );
         public string RobloxVersion
@@ -81,11 +81,10 @@ namespace NezurAimbot.Interface.Loader
         {
             KeyAuthApp.init();
             string enteredKey = Input.Password;
-            string allowedKey = "Developer-Y8LL0ckHXJAfbWZMIbooVx2vOt02YnUC";
 
             KeyAuthApp.license(enteredKey);
 
-            if (KeyAuthApp.response.success || enteredKey == allowedKey)
+            if (KeyAuthApp.response.success)
             {
                 KeyStep.Visibility = Visibility.Hidden;
                 DownloadStep.Visibility = Visibility.Visible;
