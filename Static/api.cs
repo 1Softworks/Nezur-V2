@@ -940,7 +940,7 @@ namespace NezurAimbot.Static
 
                     ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                    sigCheck(Encoding.Default.GetString(raw_response), client.ResponseHeaders["signature"], post_data.Get(0));
+                    //sigCheck(Encoding.Default.GetString(raw_response), client.ResponseHeaders["signature"], post_data.Get(0));
 
                     return Encoding.Default.GetString(raw_response);
                 }

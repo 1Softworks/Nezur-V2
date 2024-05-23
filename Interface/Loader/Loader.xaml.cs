@@ -63,12 +63,14 @@ namespace NezurAimbot.Interface.Loader
                     Destination);
             }
         }
+
         public static api KeyAuthApp = new api(
-           name: "Nezur",
-           ownerid: "2UWe8CI1m7",
-           secret: "c0d3d18df908612cc10805a2e4864663ad3d4ff9394667ee4204973585fa7da1",
-           version: "1.0"
-       );
+            name: "Nezur",
+            ownerid: "2UWe8CI1m7",
+            secret: "8c6b90c0787edaa8b1c2635f95b4bcac86c99427239c335025c4d5caf2d66c65",
+            version: "1.0"
+        );
+
         public string RobloxVersion
         {
             get
