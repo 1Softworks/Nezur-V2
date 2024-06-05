@@ -96,7 +96,7 @@ public partial class ConfigurationPage : Page
         MessageBox.Show("Please head to our Discord server and go to the Models tab to find more models");
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://discord.gg/nezurai",
+            FileName = "https://discord.gg/nezur",
             UseShellExecute = true
         });
     }

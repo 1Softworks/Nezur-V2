@@ -249,7 +249,7 @@ public partial class SettingsPage : Page
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://discord.gg/nezurai",
+            FileName = "https://discord.gg/nezur",
             UseShellExecute = true
         });
     }

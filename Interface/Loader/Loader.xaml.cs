@@ -117,7 +117,7 @@ namespace NezurAimbot.Interface.Loader
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://discord.gg/nezurai",
+                FileName = "https://discord.gg/nezur",
                 UseShellExecute = true
             });
         }

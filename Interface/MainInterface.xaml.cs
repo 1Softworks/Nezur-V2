@@ -519,7 +519,7 @@ public partial class MainInterface : Window
             Timestamps = Timestamps.Now,
             Buttons = new DiscordRPC.Button[] {
                 new() { Label = "Download (NEZUR.IO)", Url = "https://nezur.IO", },
-                new() { Label = "Join the Discord", Url = "https://discord.gg/nezurai", },
+                new() { Label = "Join the Discord", Url = "https://discord.gg/nezur", },
             },
             Assets = new Assets
             {
